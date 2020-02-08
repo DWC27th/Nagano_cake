@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NaganoCake</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <script src="https://kit.fontawesome.com/6bb1565f31.js" crossorigin="anonymous"></script>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <header class="navbar navbar-fixed-top navbar-dark bg-dark">
+      <div class="container">
+        <nav class="navbar-brand">
+          <span>長野CAKE</span>
+        </nav>
+        <nav class="navbar-nav">
+          <ul class="nav justify-content-end"  style="font-size: 14px;">
+
+                <% if member_signed_in? %>
+                  <li class="mx-3"><%= link_to ' Home', members_top_path, class: "nav-link fas fa-home" %></li>
+                  <li class="mx-3"><%= link_to ' members', members_top_path, class: "nav-link fas fa-user" %></li>
+                  <li class="mx-3"><%= link_to ' Books', members_top_path, class: "nav-link fas fa-book" %></li>
+                  <li class="mx-3"><%= link_to 'Member logout', destroy_member_session_path, class: "nav-link fas fa-sign-out-alt", method:     :delete %></li>
+                  <li class="mx-3" style="color: yellow;">会員ログイン中</li>
+
+                <% else %>
+                  <li class="mx-3"><%= link_to ' Home', root_path, class: "nav-link fas fa-home" %></li>
+                  <li class="mx-3"><%= link_to ' About', root_path, class: "nav-link fas fa-link" %></li>
+                  <li class="mx-3"><%= link_to 'Member sign up', new_member_registration_path, class: "nav-link fas fa-edit" %></li>
+                  <li class="mx-3"><%= link_to 'Member login', new_member_session_path, class: "nav-link fas fa-sign-in-alt" %></li>
+                  <li class="mx-3" style="color: red;">会員ログアウト中</li>
+
+                <% end %>
+
+                <% if admin_signed_in? %>
+
+                  <li class="mx-3"><%= link_to 'Admin logout', destroy_admin_session_path, class: "nav-link fas fa-sign-out-alt", method:     :delete %></li>
+                  <li class="mx-3" style="color: yellow;">管理者ログイン中</li>
+
+                <% else %>
+                  <li class="mx-3"><%= link_to 'Admin sign up', new_admin_registration_path, class: "nav-link fas fa-edit" %></li>
+                  <li class="mx-3"><%= link_to 'Admin login', new_admin_session_path, class: "nav-link fas fa-sign-in-alt" %></li>
+                  <li class="mx-3" style="color: red;">管理者ログアウト中</li>
+
+
+                <% end %>
+
+          </ul>
+        </nav>
+        </div>
+      </div>
+    </header>
+
+    <%= yield %>
+  </body>
+</html>
