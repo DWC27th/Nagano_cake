@@ -19,13 +19,12 @@
           <span>長野CAKE</span>
         </nav>
         <nav class="navbar-nav">
-          <ul class="nav justify-content-end"  style="font-size: 14px;">
+          <ul class="nav justify-content-end"  style="font-size: 12px;">
 
                 <% if member_signed_in? %>
                   <li class="mx-3"><%= link_to ' Home', members_top_path, class: "nav-link fas fa-home" %></li>
-                  <li class="mx-3"><%= link_to ' members', members_top_path, class: "nav-link fas fa-user" %></li>
-                  <li class="mx-3"><%= link_to ' Books', members_top_path, class: "nav-link fas fa-book" %></li>
-                  <li class="mx-3"><%= link_to 'Member logout', destroy_member_session_path, class: "nav-link fas fa-sign-out-alt", method:     :delete %></li>
+                  <li class="mx-3"><%= link_to ' Members', members_top_path, class: "nav-link fas fa-user" %></li>
+                  <li class="mx-3"><%= link_to 'Member logout', destroy_member_session_path, class: "nav-link fas fa-sign-out-alt", method: :delete %></li>
                   <li class="mx-3" style="color: yellow;">会員ログイン中</li>
 
                 <% else %>
@@ -39,7 +38,7 @@
 
                 <% if admin_signed_in? %>
 
-                  <li class="mx-3"><%= link_to 'Admin logout', destroy_admin_session_path, class: "nav-link fas fa-sign-out-alt", method:     :delete %></li>
+                  <li class="mx-3"><%= link_to 'Admin logout', destroy_admin_session_path, class: "nav-link fas fa-sign-out-alt", method: :delete %></li>
                   <li class="mx-3" style="color: yellow;">管理者ログイン中</li>
 
                 <% else %>
