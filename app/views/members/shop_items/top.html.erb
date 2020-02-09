@@ -1,1 +1,21 @@
-会員トップ画面
+<div class="container">
+
+  <div class="row justify-content-start mt-3 mb-3">
+    <h2>商品一覧</h2>
+  </div>
+
+  <table class="table">
+    <tbody>
+      <tr>
+        <% @shop_items.each do |shop_item| %>
+          <td>
+            <%= attachment_image_tag shop_item, :image, :fill, 100, 100,　format: 'jpeg', fallback: "no_image.jpg", size: 100 %>
+            <p><%= shop_item.name %></p>
+            <p><%= (shop_item.price*1.1).floor %>円</p>
+          </td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
