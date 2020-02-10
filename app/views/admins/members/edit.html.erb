@@ -1,0 +1,62 @@
+
+<h2 class="form-header-title">会員編集画面</h2>
+    <div class="form-body">
+    <%= form_for(@member) do |f| %>
+
+<div class="field">
+
+  <div><%= f.label :会員ID %>
+    <%= member.id %>
+  </div>
+</div>
+
+
+<div class="field">
+
+  <div><%= f.label :氏名 %>
+             <%= f.text_field :first_name %>
+  </div>
+
+   <div><%= f.label :last_name %>
+            <%= f.text_field :last_name %>
+   </div>
+</div>
+
+<div class="field">
+  <div><%= f.label :カナ %>
+             <%= f.text_field :first_name_kana %>
+  </div>
+    <div><%= f.label :last_name_kana %>
+             <%= f.text_field :last_name_kana %>
+    </div>
+</div>
+
+<div class="field">
+  <div><%= f.label :郵便番号 %>
+             <%= f.text_field :postal_code %>
+  </div>
+</div>
+
+<div class="field">
+  <div><%= f.label :住所 %>
+             <%= f.text_field :address %>
+  </div>
+</div>
+
+
+<div class="field">
+  <div><%= f.label :電話番号 %>
+             <%= f.text_field :phone_number %>
+  </div>
+</div>
+
+
+  <div class="field">
+    <%= f.label :メールアドレス %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "変更を保存する" %>
+  </div>
+<% end %>
