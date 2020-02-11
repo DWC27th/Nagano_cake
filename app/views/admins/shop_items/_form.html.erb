@@ -10,7 +10,7 @@
     <div class="col-5">
       <div class="field row">
         <%= attachment_image_tag @shop_item, :image, :fill, 200, 200,　format: 'jpeg', fallback: "no_image.jpg", size: 200 %>
-        <%= f.attachment_field :image %>
+        <%= f.attachment_field :image, class: "mt-3" %>
       </div>
     </div>
     <div class="col-7">

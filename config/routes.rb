@@ -8,8 +8,9 @@ Rails.application.routes.draw do
 
   namespace :members do
     resources :members, only: [:edit, :update, :show]
+    get 'cart_items' => 'cart_items#index', as: 'cart_items'
   	resources :cart_items, only: [:index, :create, :update, :destroy]
-  	resource :cart_items, only: [:destroy]
+    resource :cart_items, only: [:destroy]
   	resources :orders, only: [:index, :new, :create, :show]
   	resources :shop_items, only: [:index, :show]
   	resources :shipping_adresses, only: [:index, :create, :edit, :update, :destroy]
