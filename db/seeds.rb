@@ -35,3 +35,54 @@ Admin.create!(
     ]
   )
 end
+
+
+[
+  ['1', 'クレジットカード', '東京太郎', 'aaa-aaaa', '東京都千代田区', '0', '800'],
+  ['2', 'クレジットカード', '東京次郎', 'bbb-bbbb', '東京都新宿区', '0', '800'],
+  ['3', 'クレジットカード', '東京三郎', 'ccc-cccc', '東京都世田谷区', '0', '800'],
+  ['4', 'クレジットカード', '東京四郎', 'ddd-dddd', '東京都港区', '0', '800']
+].each do |a, b, c, d, e, f, g|
+  Order.create!(
+    [
+      {
+      member_id: a,
+      payment_method: b,
+      name: c,
+      postal_code: d,
+      address: e,
+      order_status: f,
+      shipping_fee: g
+      }
+    ]
+  )
+end
+
+[
+  ['1', '京都　A子', 'AAA-AAAA', '京都府A区'],
+  ['2', '京都　B子', 'BBB-BBBB', '京都府B区'],
+  ['3', '京都　C子', 'CCC-CCCC', '京都府C区'],
+  ['4', '京都　D子', 'DDD-DDDD', '京都府D区']
+].each do |a, b, c, d|
+  ShippingAddress.create!(
+    [
+      {
+      member_id: a,
+      name: b,
+      postal_code: c,
+      address: d
+      }
+    ]
+  )
+end
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,27 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h1>注文一覧画面</h1>
+			<table class="table">
+				<tr>
+					<th>購入日時</th>
+					<th>購入者</th>
+					<th>注文個数</th>
+					<th>注文ステータス</th>
+				</tr>
+				<% @orders.each do |order| %>
+					<tr>
+						<td><%= link_to "#{order.created_at}", admins_order_path(order.id) %></td>
+						<td><%= order.member_id %></td>
+						<td><%# @sum_quantity %></td>
+						<td><%#= order.order_status %></td>
+					</tr>
+				<% end %>
+			</table>
+		</div>
+    </div>
+</div>
+
+
+
+
