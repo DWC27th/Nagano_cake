@@ -14,7 +14,7 @@
   <body>
 
     <header class="navbar navbar-fixed-top navbar-dark bg-dark">
-      <div class="container">
+      <div class="container-fruid">
         <nav class="navbar-brand">
           <span>長野CAKE</span>
         </nav>
@@ -22,28 +22,30 @@
           <ul class="nav justify-content-end"  style="font-size: 12px;">
 
                 <% if member_signed_in? %>
-                  <li class="mx-3"><%= link_to ' Home', members_top_path, class: "nav-link fas fa-home" %></li>
-                  <li class="mx-3"><%= link_to ' Members', members_top_path, class: "nav-link fas fa-user" %></li>
-                  <li class="mx-3"><%= link_to 'Member logout', destroy_member_session_path, class: "nav-link fas fa-sign-out-alt", method: :delete %></li>
+                  <li class="mx-3"><%= link_to '会員top', members_top_path, class: "nav-link fas fa-home" %></li>
+                  <li class="mx-3"><%= link_to 'About', members_about_path, class: "nav-link fas fa-user" %></li>
+                  <li class="mx-3"><%= link_to 'カート', members_cart_items_path, class: "nav-link fas fa-user" %></li>
+                  <li class="mx-3"><%= link_to '会員logout', destroy_member_session_path, class: "nav-link fas fa-sign-out-alt", method: :delete %></li>
                   <li class="mx-3" style="color: yellow;">会員ログイン中</li>
 
                 <% else %>
-                  <li class="mx-3"><%= link_to ' Home', root_path, class: "nav-link fas fa-home" %></li>
-                  <li class="mx-3"><%= link_to ' About', root_path, class: "nav-link fas fa-link" %></li>
-                  <li class="mx-3"><%= link_to 'Member sign up', new_member_registration_path, class: "nav-link fas fa-edit" %></li>
-                  <li class="mx-3"><%= link_to 'Member login', new_member_session_path, class: "nav-link fas fa-sign-in-alt" %></li>
+                  <li class="mx-3"><%= link_to '会員登録', new_member_registration_path, class: "nav-link fas fa-edit" %></li>
+                  <li class="mx-3"><%= link_to '会員login', new_member_session_path, class: "nav-link fas fa-sign-in-alt" %></li>
                   <li class="mx-3" style="color: red;">会員ログアウト中</li>
 
                 <% end %>
 
                 <% if admin_signed_in? %>
 
-                  <li class="mx-3"><%= link_to 'Admin logout', destroy_admin_session_path, class: "nav-link fas fa-sign-out-alt", method: :delete %></li>
+                  <li class="mx-3"><%= link_to '管理者Top', admins_top_path, class: "nav-link fas fa-home" %></li>
+                  <li class="mx-3"><%= link_to '商品一覧', admins_shop_items_path, class: "nav-link fas fa-home" %></li>
+                  <li class="mx-3"><%= link_to 'ジャンル一覧', admins_genres_path, class: "nav-link fas fa-home" %></li>
+                  <li class="mx-3"><%= link_to '管理者logout', destroy_admin_session_path, class: "nav-link fas fa-sign-out-alt", method: :delete %></li>
                   <li class="mx-3" style="color: yellow;">管理者ログイン中</li>
 
                 <% else %>
-                  <li class="mx-3"><%= link_to 'Admin sign up', new_admin_registration_path, class: "nav-link fas fa-edit" %></li>
-                  <li class="mx-3"><%= link_to 'Admin login', new_admin_session_path, class: "nav-link fas fa-sign-in-alt" %></li>
+                  <li class="mx-3"><%= link_to '管理者登録', new_admin_registration_path, class: "nav-link fas fa-edit" %></li>
+                  <li class="mx-3"><%= link_to '管理者login', new_admin_session_path, class: "nav-link fas fa-sign-in-alt" %></li>
                   <li class="mx-3" style="color: red;">管理者ログアウト中</li>
 
 

@@ -30,8 +30,8 @@ class Admins::ShopItemsController < ApplicationController
   end
 
   private
-    def shop_item_params
-      params.require(:shop_item).permit(:genre_id, :name, :introduction, :price, :image, :sale_status)
-    end
+  def shop_item_params
+    params.require(:shop_item).permit(:genre_id, :name, :introduction, :price, :image, :sale_status)
+  end
 
 end

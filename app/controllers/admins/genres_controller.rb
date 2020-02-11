@@ -22,7 +22,8 @@ class Admins::GenresController < ApplicationController
   end
 
   private
-    def genre_params
-      params.require(:genre).permit(:name, :published_status)
-    end
+  def genre_params
+    params.require(:genre).permit(:name, :published_status)
+  end
+
 end
