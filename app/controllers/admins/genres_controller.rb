@@ -1,7 +1,8 @@
 class Admins::GenresController < ApplicationController
 
   def index
-  	@genres = Genre.all
+  	#@genres = Genre.where(published_status: "有効")
+    @genres = Genre.all
   	@genre = Genre.new
   end
 
@@ -13,6 +14,9 @@ class Admins::GenresController < ApplicationController
 
   def edit
   	@genre = Genre.find(params[:id])
+    #if @genre.published_status == "無効"
+    #  redirect_to root_path
+    #end
   end
 
   def update
