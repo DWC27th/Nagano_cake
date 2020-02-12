@@ -1,7 +1,9 @@
 class Admins::ShopItemsController < ApplicationController
 
   def index
-    @shop_items = ShopItem.all
+    @genres = Genre.where(published_status: "有効")  #ステータスが有効なジャンルのみ取得
+    #@shop_items = ShopItem.all
+    @shop_items = ShopItem.where(genre_id: @genres.ids)  #ステータスが有効なジャンルに紐付いた商品だけを取得
   end
 
   def new
@@ -15,12 +17,11 @@ class Admins::ShopItemsController < ApplicationController
   end
 
   def show
-    @shop_item = ShopItem.find(params[:id])
-    @genre = Genre.find(@shop_item.genre_id)
+    shop_item_genre_enable?  #application_controllerにて定義
   end
 
   def edit
-    @shop_item = ShopItem.find(params[:id])
+    shop_item_genre_enable?  #application_controllerにて定義
   end
 
   def update
