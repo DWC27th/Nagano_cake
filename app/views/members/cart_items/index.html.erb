@@ -1,6 +1,6 @@
 <div class="container">
 
-  <div class="row justify-content-start mt-3 mb-3">
+  <div class="row justify-content-start mt-3 mb-1">
     <h2 class="fas fa-shopping-cart"> ショッピングカート</h2>
   </div>
 
@@ -12,7 +12,7 @@
     <thead class="thead-light">
       <tr>
         <th>商品名</th>
-        <th>商品画像</th>
+        <th>商品状態</th>
         <th>単価(税込)</th>
         <th>数量</th>
         <th>数量</th>
@@ -28,7 +28,12 @@
         <% cart_item_total_price = cart_item_total_price + cart_item_price %>
         <tr>
           <td><%= link_to shop_item.name, members_shop_item_path(shop_item.id) %></td>
-          <td><%= link_to (attachment_image_tag shop_item, :image, :fill, 50, 50,　format: 'jpeg', fallback: "no_image.jpg", size: 50, class: "mb-1"), members_shop_item_path(shop_item.id) %></td>
+          <td>
+            <%= link_to (attachment_image_tag shop_item, :image, :fill, 50, 50,　format: 'jpeg', fallback: "no_image.jpg", size: 50, class: "mb-1"), members_shop_item_path(shop_item.id) %>
+            <% if shop_item.sale_status == "売切れ" || shop_item.genre.published_status == "無効" %>
+              <div class="badge badge-danger">売切れ</div>
+            <% end %>
+          </td>
           <td><%= shop_item_price_with_tax.to_s(:delimited) %>円</td>
           <td><%= cart_item.quantity %></td>
           <td>

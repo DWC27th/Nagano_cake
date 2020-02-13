@@ -11,7 +11,7 @@ class Admins::GenresController < ApplicationController
   	if @genre.save
   	  redirect_to admins_genres_path, notice: "ジャンル情報が登録されました"
     else
-      @genres = Genre.all
+      @genres = Genre.all.page(params[:page])
       flash.now[:alert] = "#{@genre.errors.count}件のエラーが有ります"
       render "index"
     end
