@@ -1,7 +1,7 @@
 <div class="container">
 
   <div class="row justify-content-start mt-3 mb-3">
-    <h2>ショッピングカート</h2>
+    <h2 class="fas fa-shopping-cart"> ショッピングカート</h2>
   </div>
 
   <div class="row justify-content-end mb-3">
@@ -12,6 +12,7 @@
     <thead class="thead-light">
       <tr>
         <th>商品名</th>
+        <th>商品画像</th>
         <th>単価(税込)</th>
         <th>数量</th>
         <th>数量</th>
@@ -26,8 +27,9 @@
         <% cart_item_price = shop_item_price_with_tax * cart_item.quantity %>
         <% cart_item_total_price = cart_item_total_price + cart_item_price %>
         <tr>
-          <td><%= shop_item.name %></td>
-          <td><%= shop_item_price_with_tax %>円</td>
+          <td><%= link_to shop_item.name, members_shop_item_path(shop_item.id) %></td>
+          <td><%= link_to (attachment_image_tag shop_item, :image, :fill, 50, 50,　format: 'jpeg', fallback: "no_image.jpg", size: 50, class: "mb-1"), members_shop_item_path(shop_item.id) %></td>
+          <td><%= shop_item_price_with_tax.to_s(:delimited) %>円</td>
           <td><%= cart_item.quantity %></td>
           <td>
             <%= form_for(cart_item, url: members_cart_item_path(cart_item.id)) do |f| %>
@@ -35,7 +37,7 @@
               <%= f.submit "変更", class: "btn btn-primary" %>
             <% end %>
           </td>
-          <td><%= cart_item_price %>円</td>
+          <td><%= cart_item_price.to_s(:delimited) %>円</td>
           <td>
             <%= link_to "削除する", members_cart_item_path(cart_item.id) , method: :delete, "data-confirm" => "削除してもよろしいですか？", class: "btn btn-danger" %>
           </td>
@@ -53,7 +55,7 @@
         <tr>
           <thead class="thead-light">
             <th>合計金額</th>
-            <td><%= cart_item_total_price %>円</td>
+            <td><%= cart_item_total_price.to_s(:delimited) %>円</td>
           </thead>
         </tr>
       </table>

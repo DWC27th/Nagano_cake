@@ -2,14 +2,19 @@ class Admins::GenresController < ApplicationController
 
   def index
   	#@genres = Genre.where(published_status: "有効")
-    @genres = Genre.all
+    @genres = Genre.all.page(params[:page])
   	@genre = Genre.new
   end
 
   def create
   	@genre = Genre.new(genre_params)
-  	@genre.save
-  	redirect_to admins_genres_path
+  	if @genre.save
+  	  redirect_to admins_genres_path, notice: "ジャンル情報が登録されました"
+    else
+      @genres = Genre.all
+      flash.now[:alert] = "#{@genre.errors.count}件のエラーが有ります"
+      render "index"
+    end
   end
 
   def edit
@@ -21,8 +26,12 @@ class Admins::GenresController < ApplicationController
 
   def update
   	@genre = Genre.find(params[:id])
-  	@genre.update(genre_params)
-  	redirect_to admins_genres_path
+  	if @genre.update(genre_params)
+      redirect_to admins_genres_path, notice: "ジャンル情報が更新されました"
+    else
+      flash.now[:alert] = "#{@genre.errors.count}件のエラーが有ります"
+      render "edit"
+    end
   end
 
   private

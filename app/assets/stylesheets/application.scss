@@ -25,3 +25,8 @@ a{
   text-decoration: none;
   color: #333333;
 }
+
+/*ページネーション自体のデザイン*/
+.pagination>li>a {
+  color: #696969;   /*文字の色を変える*/
+}
