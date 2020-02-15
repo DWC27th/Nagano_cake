@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
-  devise_for :admins
   devise_for :members
+  devise_for :admins, controllers: {
+    sessions: 'admins/sessions'
+  }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 
@@ -21,6 +23,8 @@ Rails.application.routes.draw do
     put 'members/:id' => 'members#withdraw', as: 'withdraw_put'
     patch 'members/:id' => 'members#withdraw', as: 'withdraw_patch'
 
+    root 'members/shop_items#top'
+
   end
 
   namespace :admins do
@@ -29,9 +33,10 @@ Rails.application.routes.draw do
   	resources :shop_items, only: [:index, :new, :create, :show, :edit, :update]
   	resources :genres, only: [:index, :create, :edit, :update]
     get 'top' => 'orders#top', as: 'top'
+
+    
   end
 
-
-  root 'members/shop_items#top'
+root 'admins/orders#top'
 
 end

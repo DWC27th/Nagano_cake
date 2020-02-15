@@ -1,0 +1,44 @@
+<h3 style="margin: 20px;">マイページ</h3>
+
+<bosy class=background-image></body>
+
+
+    <h5 style="padding: 20px 0px 10px 28px;">登録情報</h4>
+    <div style="padding: 0px 0px 20px 28px ;"><%= link_to"編集する", edit_members_member_path(@member.id), class: "btn btn-primary"  %> 
+	    <button style="margin: 10px;" class="btn btn-primary">パスワードを変更する</button>
+    </div>
+        <div style="margin-left: 28px;">
+            <table align="28" border="1" width="700" cellspacing="0" cellpadding="5" bordercolor="#333333">
+
+                <tr>
+                    <td bgcolor="#d3d3d3" align="left" nowrap>氏名</td>
+                        <td bgcolor="#FFFFFF" valign="top" width="500"><%= @member.first_name %><%= @member.last_name %></td>
+                </tr>
+
+                    <tr>
+                        <td bgcolor="#d3d3d3" align="left" nowrap>フリガナ</td>
+                        <td bgcolor="#FFFFFF" valign="top" width="500"><%= @member.first_name_kana %><%= @member.last_name_kana %></td>
+                    </tr>
+
+                        <tr>
+                            <td bgcolor="#d3d3d3" align="left" nowrap>郵便番号</td>
+                            <td bgcolor="#FFFFFF" valign="top" width="500"><%= @member.postal_code %></td>
+                        </tr>
+
+                            <tr>
+                                <td bgcolor="#d3d3d3" align="left" nowrap>住所</td>
+                                <td bgcolor="#FFFFFF" valign="top" width="500"><%= @member.address %></td>
+                            </tr>
+
+                                <tr>
+                                    <td bgcolor="#d3d3d3" align="left" nowrap>メールアドレス</td>
+                                    <td bgcolor="#FFFFFF" valign="top" width="500"><%= @member.email %></td>
+                                </tr>
+            </table>
+        </div>
+
+
+<h5 style="margin: 28px;">配送先   <%= link_to"一覧を見る", members_shipping_adresses_path, class: "btn btn-primary" ,style:"margin-left:18px;" %></h5>
+<h5 style="margin: 28px;">注文履歴  <%= link_to"一覧を見る", members_orders_path, class: "btn btn-primary" %></h5>
+
+
