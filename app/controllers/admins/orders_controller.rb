@@ -1,5 +1,6 @@
 class Admins::OrdersController < ApplicationController
 
+<<<<<<< HEAD
 	def top
 		@orders = Order.all
 		#today = Time.now.day
@@ -87,5 +88,4 @@ class Admins::OrdersController < ApplicationController
     def order_params
     	params.require(:order).permit(:member_id, :payment_method, :name, :postal_code, :address, :order_status, :shipping_fee, order_items_attributes:[:id, :order_id, :shop_item_id, :quantity, :price, :production_status])
     end
-
 end

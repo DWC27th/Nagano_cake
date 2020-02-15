@@ -86,6 +86,7 @@ class Members::OrdersController < ApplicationController
 		#binding.pry
 		@shop_items = ShopItem.all
 		@shop_item = current_member.shop_items
+
 		#@order_item = OrderItem.find(params[orders.id])
 		#@sum_price = 0
 		#@order_item.each do |order_item|
