@@ -1,9 +1,10 @@
 <div class="container">
 
   <div class="row justify-content-start mt-3 mb-5">
-    <h2>ジャンル編集画面</h2>
+    <h2 class="fa fa-star"> ジャンル編集画面</h2>
   </div>
 
+  <%= render partial: "/layouts/error_messages", locals: { model: @genre } %>
   <%= render partial: 'form', locals: { genre: @genre, edit_flag: true } %>
 
 </div>

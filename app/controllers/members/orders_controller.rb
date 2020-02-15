@@ -11,14 +11,16 @@ class Members::OrdersController < ApplicationController
 	end
 
 	def new
-		@order = Order.new
-		@order.member_id = current_member.id
-		@shipping_addresses = ShippingAddress.all
-		@order.order_status = "入金待ち"
-		@order.shipping_fee = 800
-
-    	@my_shipping_addresses = current_member.shipping_addresses
-    	#binding.pry
+  	    if current_member.shop_items.where(sale_status: "売切れ").blank? && Genre.where(id: current_member.shop_items.select(:genre_id), published_status: "無効").blank?  #カート商品の販売ステータス及びジャンルステータスが売切れ、無効でない場合
+		    @order = Order.new
+		    @order.member_id = current_member.id
+		    @shipping_addresses = ShippingAddress.all
+		    @order.order_status = 0
+		    @order.shipping_fee = 800
+		    @my_shipping_addresses = current_member.shipping_addresses
+  	    else
+  	      redirect_to members_cart_items_path, alert: "大変申し訳ございません。売切れ商品がカートにございます。お手数ですが削除してから情報入力にお進みください。"
+  	    end
 	end
 
 	def create
@@ -73,7 +75,6 @@ class Members::OrdersController < ApplicationController
 			#@sum_price = @sum_price + (order_item.price * order_item.quantity)
 		#end
 	end
-
 
 	private
     def order_params

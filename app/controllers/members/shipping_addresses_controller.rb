@@ -2,6 +2,7 @@ class Members::ShippingAddressesController < ApplicationController
 	def index
 		@shipping_address = ShippingAddress.new
 		@shipping_addresses = ShippingAddress.all
+
     @my_shipping_addresses = current_member.shipping_addresses
     #binding.pry
 	end
