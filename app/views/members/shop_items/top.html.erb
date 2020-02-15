@@ -1,1 +1,17 @@
-会員トップ画面
+<div class="container">
+
+  <div class="row">
+
+    <%= render partial: 'search_genres', locals: { genres: @genres } %>
+
+    <div class="col-9">
+      <div class="row justify-content-start mt-3 mb-3">
+        <h2 class="fas fa-store"> 商品一覧</h2>
+      </div>
+
+      <%= render partial: 'shop_items_table', locals: { shop_items: @shop_items } %>
+    </div>
+
+  </div>
+
+</div>

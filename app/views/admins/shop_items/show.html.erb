@@ -1,0 +1,41 @@
+<div class="container">
+
+  <div class="row justify-content-start mt-3 mb-5">
+    <h2 class="fas fa-store"> 商品 詳細画面</h2>
+  </div>
+
+  <div class="row justify-content-center">
+
+    <div class="col-2 offset-1">
+      <%= attachment_image_tag @shop_item, :image, :fill, 200, 200,　format: 'jpeg', fallback: "no_image.jpg", size: 200 %>
+    </div>
+
+    <div class="col-7 offset-2">
+      <div class="row mb-3">
+        <div class="col-4">商品名</div>
+        <div class="col-8"><%= @shop_item.name %></div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">商品説明</div>
+        <div class="col-8"><%= @shop_item.introduction %></div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">ジャンル</div>
+        <div class="col-8"><%= @genre.name %></div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">税込価格（税抜価格）</div>
+        <div class="col-8"><%= (@shop_item.price*1.1).floor.to_s(:delimited) %>（<%= @shop_item.price.to_s(:delimited) %>）円</div>
+      </div>
+      <div class="row mb-3">
+      	<div class="col-4">販売ステータス</div>
+        <div class="col-8"><%= @shop_item.sale_status %></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-end mt-5">
+    <%= link_to "編集する", edit_admins_shop_item_path(@shop_item.id), class: "btn btn-primary" %>
+  </div>
+
+</div>

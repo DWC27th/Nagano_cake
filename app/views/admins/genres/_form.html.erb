@@ -1,0 +1,34 @@
+<div class="container">
+
+  <% if local_assigns[:edit_flag].present? %>
+    <% temp = admins_genre_path(genre.id) %>
+  <% else %>
+    <% temp = admins_genres_path %>
+  <% end %>
+
+  <%= form_for(genre, url: temp, html: {class: "row"}) do |f| %>
+
+    <div class="field col-4">
+      <%= f.label :name, "ジャンル" %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="col-2">
+      <%= f.radio_button :published_status, :有効, checked: "checked" %>
+      <%= f.label :有効, class: "job_type_label" %>
+    </div>
+    <div class="col-2">
+      <%= f.radio_button :published_status, :無効 %>
+      <%= f.label :無効, class: "job_type_label" %>
+    </div>
+    <% if local_assigns[:edit_flag].present? %>
+      <div class="action col-2">
+        <%= f.submit "変更を保存", class: "btn btn-primary" %>
+      </div>
+    <% else %>
+      <div class="action col-2">
+        <%= f.submit "追加", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  <% end %>
+
+</div>
