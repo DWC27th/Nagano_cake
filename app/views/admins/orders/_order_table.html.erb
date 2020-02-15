@@ -1,0 +1,21 @@
+<tr>
+	<td><%= link_to "#{order.created_at}", admins_order_path(order.id) %></td>
+	<% purchaser_name = "" %>
+	<% @members.each do |member| %>
+		<% if member.id == order.member_id %>
+			<% purchaser_name = "#{member.last_name}" + "#{member.first_name}"  %>
+			<% break %>
+		<% else %>
+			<% purchaser_name = "No" %>
+		<% end %>
+	<% end %>
+	<td><%= purchaser_name %></td>
+	<% order_item_total_quantity = 0 %>
+	<% @order_items.each do |order_item| %>
+		<% if order_item.order_id == order.id %>
+			<% order_item_total_quantity = order_item_total_quantity + order_item.quantity %>
+		<% end %>
+	<% end %>
+	<td><%= order_item_total_quantity %></td>
+	<td><%= order.order_status %></td>
+</tr>
