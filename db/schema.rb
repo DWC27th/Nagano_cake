@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2020_02_12_121917) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "member_id"
+    t.integer "member_id"
     t.string "payment_method"
     t.string "name"
     t.string "postal_code"
