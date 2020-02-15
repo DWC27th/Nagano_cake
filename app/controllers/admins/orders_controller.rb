@@ -1,6 +1,4 @@
 class Admins::OrdersController < ApplicationController
-
-<<<<<<< HEAD
 	def top
 		@orders = Order.all
 		#today = Time.now.day
