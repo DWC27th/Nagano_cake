@@ -7,17 +7,18 @@
   <% end %>
 
   <%= form_for(genre, url: temp, html: {class: "row"}) do |f| %>
+
     <div class="field col-4">
       <%= f.label :name, "ジャンル" %>
       <%= f.text_field :name %>
     </div>
     <div class="col-2">
-      <%= f.radio_button :published_status, :enable, checked: "checked" %>
-      <%= f.label :enable, class: "job_type_label" %>
+      <%= f.radio_button :published_status, :有効, checked: "checked" %>
+      <%= f.label :有効, class: "job_type_label" %>
     </div>
     <div class="col-2">
-      <%= f.radio_button :published_status, :disable %>
-      <%= f.label :disable, class: "job_type_label" %>
+      <%= f.radio_button :published_status, :無効 %>
+      <%= f.label :無効, class: "job_type_label" %>
     </div>
     <% if local_assigns[:edit_flag].present? %>
       <div class="action col-2">

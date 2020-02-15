@@ -15,9 +15,9 @@
  */
  @import "bootstrap";
 
-
  * {
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -25,6 +25,17 @@
 
 
 
+
+a{
+  text-decoration: none;
+  color: #333333;
+}
+
+
+/*ページネーション自体のデザイン*/
+.pagination>li>a {
+  color: #696969;   /*文字の色を変える*/
+}
 
 
 
@@ -40,5 +51,24 @@ h4 {
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-color: #464646;
+
+.shop{
+  position: relative;
+  color: #ffd5d5;
+  font-family: "Comic Sans MS";
 }
 
+.shop-title {
+  position: absolute;
+  top: 80px;
+  left: 60px;
+  font-size: 80px;
+
+}
+
+  .shop-subtitle {
+  position: absolute;
+  top: 189px;
+  left: 90px;
+  font-size: 30px;
+  }

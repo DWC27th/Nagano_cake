@@ -1,0 +1,26 @@
+<table class="table table-borderless">
+  <tbody>
+    <% shop_items.in_groups_of(4) do |row| %>
+      <tr>
+        <% row.each do |shop_item| %>
+        <td>
+          <% if shop_item %>
+            <%= link_to (attachment_image_tag shop_item, :image, :fill, 150, 150,　format: 'jpeg', fallback: "no_image.jpg", size: 150, class: "mb-1"), members_shop_item_path(shop_item.id) %>
+            <% if shop_item.sale_status == "売切れ" %>
+              <div class="badge badge-danger">売切れ</div>
+            <% else %>
+            　<div class="badge badge-success">販売中</div>
+            <% end %>
+            <div><%= shop_item.name %></div>
+            <div><%= (shop_item.price*1.1).floor.to_s(:delimited) %>円</div>
+          <% end %>
+        </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="row justify-content-center mt-3">
+  <%= paginate @shop_items, class: "paginate" %>
+</div>

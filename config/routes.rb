@@ -10,13 +10,15 @@ Rails.application.routes.draw do
 
   namespace :members do
     resources :members, only: [:edit, :update, :show, :destroy]
+    get 'cart_items' => 'cart_items#index', as: 'cart_items'
+
   	resources :cart_items, only: [:index, :create, :update, :destroy]
   	resource :cart_items, only: [:destroy]
+    get 'orders/complete' => 'orders#complete', as: 'order_complete'
   	resources :orders, only: [:index, :new, :create, :show]
   	resources :shop_items, only: [:index, :show]
-  	resources :shipping_adresses, only: [:index, :create, :edit, :update, :destroy]
+  	resources :shipping_addresses, only: [:index, :create, :edit, :update, :destroy]
     get 'orders/new/confirm' => 'orders#confirm', as: 'order_confirm'
-    get 'orders/complete' => 'orders#complete', as: 'order_complete'
     get 'top' => 'shop_items#top', as: 'top'
     get 'about' => 'shop_items#about', as: 'about'
     get 'members/:id/edit/cancel' => 'members#cancel', as: 'cancel'
@@ -34,7 +36,7 @@ Rails.application.routes.draw do
   	resources :genres, only: [:index, :create, :edit, :update]
     get 'top' => 'orders#top', as: 'top'
 
-    
+
   end
 
 root 'admins/orders#top'

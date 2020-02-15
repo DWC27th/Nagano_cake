@@ -1,13 +1,14 @@
 <div class="container">
 
   <div class="row justify-content-start mt-3 mb-5">
-    <h2>ジャンル追加・一覧画面</h2>
+    <h2 class="fa fa-star"> ジャンル追加・一覧画面</h2>
   </div>
 
+  <%= render partial: "/layouts/error_messages", locals: { model: @genre } %>
   <%= render partial: 'form', locals: { genre: @genre } %>
 
-  <table class="table mt-5">
-    <thead>
+  <table class="table table-hover table-inverse mt-3">
+    <thead class="thead-light">
       <tr>
         <th>ジャンルID</th>
         <th>ジャンル</th>
@@ -20,11 +21,19 @@
         <tr>
         	<td><%= genre.id %></td>
           <td><%= genre.name %></td>
-          <td><%= genre.published_status %></td>
-          <td><%= link_to "編集する", edit_admins_genre_path(genre.id), class: "btn btn-primary" %></td>
+          <% if genre.published_status == "無効" %>
+            <td><div class="btn btn-danger btn-sm active"><%= genre.published_status %></div></td>
+          <% else %>
+            <td><div class="btn btn-success btn-sm active"><%= genre.published_status %></div></td>
+          <% end %>
+          <td><%= link_to "編集する", edit_admins_genre_path(genre.id), class: "btn btn-primary btn-sm" %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+
+  <div class="row justify-content-center mt-3">
+    <%= paginate @genres, class: "paginate" %>
+  </div>
 
 </div>

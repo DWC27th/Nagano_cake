@@ -1,0 +1,19 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h3>注文情報確認</h3>
+		    <h5>支払方法</h5>
+          	<%= @order.payment_method %><br>
+          	<h5>お届け先</h5>
+          	〒<%= @order.postal_code %> <%= @order.address %> <%= @order.name %><br>
+          	<%= form_for(@order, url: members_orders_path) do |order| %>
+          		<%= order.hidden_field :member_id %>
+          		<%= order.hidden_field :payment_method %>
+          		<%= order.hidden_field :postal_code %>
+          		<%= order.hidden_field :address %>
+          		<%= order.hidden_field :name %>
+          		<button type="submit" class="btn btn-primary btn-block">購入を確定する</button>
+			<% end %>
+		</div>
+    </div>
+</div>
