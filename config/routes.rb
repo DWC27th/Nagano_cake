@@ -34,10 +34,8 @@ Rails.application.routes.draw do
   	resources :shop_items, only: [:index, :new, :create, :show, :edit, :update]
   	resources :genres, only: [:index, :create, :edit, :update]
     get 'top' => 'orders#top', as: 'top'
-
-    
   end
 
-root 'admins/orders#top'
+  root 'admins/orders#top'
 
 end
