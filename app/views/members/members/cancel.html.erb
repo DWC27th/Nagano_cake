@@ -12,8 +12,9 @@
         <div class="actions" style="text-align:center;">
 
             <%= f.hidden_field :member_status, :value => 1 %>
-            <%= f.submit "退会する",class: "btn btn-danger" %> 
-            <%= link_to "退会しない",members_top_path, class: "btn btn-primary" %>
-            <% end %>
+            <%=  link_to "退会する",members_top_path, method: :delete, class: "btn btn-danger" %>
+            <%= link_to "退会しない",members_member_path(@member.id), class: "btn btn-primary" %>
         </div>
+    <% end %>
 </div>
+

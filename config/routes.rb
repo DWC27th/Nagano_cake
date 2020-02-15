@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
 
   namespace :members do
-    resources :members, only: [:edit, :update, :show]
+    resources :members, only: [:edit, :update, :show, :destroy]
   	resources :cart_items, only: [:index, :create, :update, :destroy]
   	resource :cart_items, only: [:destroy]
   	resources :orders, only: [:index, :new, :create, :show]
