@@ -1,0 +1,56 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h3>配送先登録・一覧</h3>
+			<%= form_for(@shipping_address, url: members_shipping_addresses_path) do |shipping_address| %>
+				<div class="col-7">
+	      			<div class="field row mb-3">
+		      			<%= shipping_address.label :postal_code, "郵便番号", class: "col-4" %>
+		                <%= shipping_address.text_field :postal_code, class: "col-8" %>
+	            	</div>
+	            	<div class="field row mb-3">
+		      			<%= shipping_address.label :address, "住所", class: "col-4" %>
+		                <%= shipping_address.text_area :address, class: "col-8" %>
+	            	</div>
+	            	<div class="field row mb-3">
+		      			<%= shipping_address.label :name, "宛名", class: "col-4" %>
+		                <%= shipping_address.text_field :name, class: "col-8" %>
+	            	</div>
+	            </div>
+	            <div class="col-4">
+	                <div class="action col offset-2 mt-3">
+	                	<button type="submit" class="btn btn-primary btn-block">登録する</button>
+	                </div>
+            	</div>
+			<% end %>
+			<table class="table table-bordered">
+				<thead class="thead-light">
+				<tr>
+					<th>郵便番号</th>
+					<th>住所</th>
+					<th>宛名</th>
+					<th></th>
+					<th></th>
+				</tr>
+				</thead>
+				<tbody>
+				<% @my_shipping_addresses.each do |my_shipping_addresses| %>
+					<tr>
+						<td><%= my_shipping_addresses.postal_code %></td>
+						<td><%= my_shipping_addresses.address %></td>
+						<td><%= my_shipping_addresses.name %></td>
+						<td><%= link_to edit_members_shipping_address_path(my_shipping_addresses) do %>
+				 				<button type="button" class="btn btn-default btn-block">編集する</button>
+							<% end %>
+						</td>
+						<td><%= link_to members_shipping_address_path(my_shipping_addresses), method: :delete do %>
+				 				<button type="button" class="btn btn-default btn-block">削除する</button>
+							<% end %>
+						</td>
+					</tr>
+				<% end %>
+				</tbody>
+			</table>
+		</div>
+    </div>
+</div>

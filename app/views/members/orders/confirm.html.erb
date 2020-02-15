@@ -1,0 +1,85 @@
+<div class="container">
+     <div class="row">
+          <div class="col-xs-8">
+            <% idx_num = @order.shipping_fee %>
+            <h5>注文情報確認</h5>
+            <table class="table">
+              <tr>
+                <th>商品</th>
+                <th>単価（税込）</th>
+                <th>個数</th>
+                <th>小計</th>
+              </tr>
+              <% cart_item_total_price = 0 %>
+              <% @shop_item.zip(@cart_item).each do |shop_item, cart_item| %>
+                  <% shop_item_price_with_tax = (shop_item.price * 1.1).floor %>
+                  <% cart_item_price = shop_item_price_with_tax * cart_item.quantity %>
+                  <% cart_item_total_price = cart_item_total_price + cart_item_price %>
+                  <tr>
+                    <td><%= shop_item.name %></td>
+                    <td><%= shop_item_price_with_tax %></td>
+                    <td><%= cart_item.quantity %></td>
+                    <td><%= cart_item_price %></td>
+                  </tr>
+              <% end %>
+            </table>
+          </div>
+          <div class="col-xs-4">
+            <% @order.shipping_fee = 800 %>
+            <table class="table">
+              <tr>
+                <th>配送料</th><td><%= @order.shipping_fee %>円</td>
+              </tr>
+              <tr>
+                <th>商品合計</th><td><%= cart_item_total_price %>円</td>
+              </tr>
+              <tr>
+                <th>請求金額</th><td><%= cart_item_total_price + @order.shipping_fee %>円</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-xs-12">
+              <h3>注文情報確認</h3>
+              <h5>支払方法</h5>
+              <%= @order.payment_method %><br>
+              <h5>お届け先</h5>
+              <% if @order.member_id == 111 %>
+                  〒<%= @order.postal_code = "#{current_member.postal_code}" %> <%= @order.address = "#{current_member.address}" %><br>
+                  <%= @order.name = "#{current_member.last_name}#{current_member.first_name}" %>
+              <% elsif @order.member_id == 222 %>
+                  <% @my_shipping_addresses.each.with_index(1) do |my_shipping_addresses_search, index| %>
+                      <% if index == idx_num %>
+                          <% @order.postal_code = my_shipping_addresses_search.postal_code %>
+                          <% @order.address = my_shipping_addresses_search.address %>
+                          <% @order.name = my_shipping_addresses_search.name %>
+                          <% break %>
+                      <% end %>
+                  <% end %>
+                      〒<%= @order.postal_code %> <%= @order.address %><br>
+                      <%= @order.name %>
+              <% elsif @order.member_id == 333 %>
+                  〒<%= @order.postal_code %> <%= @order.address %><br>
+                  <%= @order.name %>
+              <% else %>
+              <% end %>
+              <% @order.member_id = current_member.id %>
+              <%= form_for(@order, url: members_orders_path) do |order| %>
+                  <%= order.hidden_field :member_id %>
+                  <%= order.hidden_field :payment_method %>
+                  <%= order.hidden_field :postal_code %>
+                  <%= order.hidden_field :address %>
+                  <%= order.hidden_field :name %>
+                      <% @shop_item.zip(@cart_item).each do |shop_item, cart_item| %>
+                          <%= order.fields_for :order_items, OrderItem.new do |order_item| %>
+                            <%= order_item.hidden_field :order_id, :value => @order.id %>
+                            <%= order_item.hidden_field :shop_item_id, :value => shop_item.id %>
+                            <%= order_item.hidden_field :quantity, :value => cart_item.quantity %>
+                            <%= order_item.hidden_field :price, :value => shop_item.price %>
+                            <%= order_item.hidden_field :production_status, :value => "着手不可" %>
+                          <% end %>
+                      <% end %>
+                  <button type="submit" class="btn btn-primary btn-block">購入を確定する</button>
+              <% end %>
+          </div>
+    </div>
+</div>
