@@ -4,6 +4,7 @@ class Admins::ShopItemsController < ApplicationController
     @genres = Genre.where(published_status: "有効")  #ステータスが有効なジャンルのみ取得
     #@shop_items = ShopItem.all
     @shop_items = ShopItem.where(genre_id: @genres.ids)  #ステータスが有効なジャンルに紐付いた商品だけを取得
+    @shop_items = @shop_items.page(params[:page])
   end
 
   def new
@@ -12,8 +13,12 @@ class Admins::ShopItemsController < ApplicationController
 
   def create
     @shop_item = ShopItem.new(shop_item_params)
-    @shop_item.save
-    redirect_to admins_shop_items_path
+    if @shop_item.save
+      redirect_to admins_shop_items_path, notice: "商品情報が登録されました"
+    else
+      flash.now[:alert] = "#{@shop_item.errors.count}件のエラーが有ります"
+      render "new"
+    end
   end
 
   def show
@@ -26,8 +31,12 @@ class Admins::ShopItemsController < ApplicationController
 
   def update
     @shop_item = ShopItem.find(params[:id])
-    @shop_item.update(shop_item_params)
-    redirect_to admins_shop_item_path(@shop_item.id)
+    if @shop_item.update(shop_item_params)
+      redirect_to admins_shop_item_path(@shop_item.id), notice: "商品情報が更新されました"
+    else
+      flash.now[:alert] = "#{@shop_item.errors.count}件のエラーが有ります"
+      render "edit"
+    end
   end
 
   private

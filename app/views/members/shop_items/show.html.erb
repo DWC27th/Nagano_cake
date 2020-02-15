@@ -22,13 +22,18 @@
             <h4>¥ <%= (@shop_item.price * 1.1).floor %>（税込）</h4>
           </div>
 
-          <div class="row justify-content-end">
-            <%= form_for(@cart_item, url: members_cart_items_path) do |f| %>
-              <%= f.select :quantity, [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ], prompt: "個数選択" %>
-              <%= f.hidden_field :shop_item_id, value: @shop_item.id %>
-              <%= f.submit "カートに入れる", class: "btn btn-primary" %>
-            <% end %>
-          </div>
+          <% if @shop_item.sale_status == "売切れ" %>
+            <div class="btn btn-danger active">売切れ</div>
+          <% else %>
+          　<div class="btn btn-success active">販売中</div>
+            <div class="row justify-content-end">
+              <%= form_for(@cart_item, url: members_cart_items_path) do |f| %>
+                <%= f.select :quantity, [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ], prompt: "個数選択" %>
+                <%= f.hidden_field :shop_item_id, value: @shop_item.id %>
+                <%= f.submit "カートに入れる", class: "btn btn-primary" %>
+              <% end %>
+            </div>
+          <% end %>
 
         </div>
 
