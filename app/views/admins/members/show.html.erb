@@ -1,0 +1,54 @@
+<h4 style="margin: 30px;">会員詳細画面</h4>
+
+
+    <div style="margin-left: 28px;">
+
+                <table align="28" border="1" width="700" cellspacing="0" cellpadding="5" bordercolor="#333333">
+
+                    <tr>
+                        <td bgcolor="#d3d3d3" align="left" nowrap>会員ID</td>
+                        <td bgcolor="#FFFFFF" valign="top" width="500"><%= @member.id %> <div style="background-color: #87ceeb; width: 60px; display:inline-block; margin-left:5px; border-radius: 10px; text-align: center;"><%= @member.member_status%></td></div>
+                    </tr>
+
+                    <tr>
+                        <td bgcolor="#d3d3d3" align="left" nowrap>氏名</td>
+                        <td bgcolor="#FFFFFF" valign="top" width="500"> <%= @member.first_name %><%= @member.last_name %></td>
+                    </tr>
+
+                    <tr>
+                        <td bgcolor="#d3d3d3" align="left" nowrap>フリガナ</td>
+                        <td bgcolor="#FFFFFF" valign="top" width="500"><%= @member.first_name_kana %><%= @member.last_name_kana %></td>
+                    </tr>
+
+                    <tr>
+                        <td bgcolor="#d3d3d3" align="left" nowrap>郵便番号</td>
+                        <td bgcolor="#FFFFFF" valign="top" width="500"><%= @member.postal_code %></td>
+                    </tr>
+
+                    <tr>
+                        <td bgcolor="#d3d3d3" align="left" nowrap>住所</td>
+                        <td bgcolor="#FFFFFF" valign="top" width="500"><%= @member.address %></td>
+                    </tr>
+
+                    <tr>
+                        <td bgcolor="#d3d3d3" align="left" nowrap>電話番号</td>
+                        <td bgcolor="#FFFFFF" valign="top" width="500"><%= @member.phone_number %></td>
+                    </tr>
+
+                    <tr>
+                        <td bgcolor="#d3d3d3" align="left" nowrap>メールアドレス</td>
+                        <td bgcolor="#FFFFFF" valign="top" width="500"><%= @member.email %></td>
+                    </tr>
+                </table>
+
+
+
+
+
+
+                            <div class="actions" style="margin: 30px;">
+                                <%= link_to"編集する", edit_admins_member_path, class: "btn btn-primary" %>
+                                <%= link_to"注文履歴一覧を見る", admins_orders_path, class: "btn btn-primary" %>
+                            </div>
+
+    </div>

@@ -1,0 +1,40 @@
+
+
+
+<div style="background-color: #c0c0c0; margin: 30px; width: 210px;">会員の方はこちらからログイン</div>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  
+  <div style="margin-left: 100px;">
+    <div class="field">
+      <%= f.label :メールアドレス %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :パスワード %><br />
+    <%= f.password_field :password, autocomplete: "current-password" %>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="field">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+  <% end %>
+
+  <div class="actions" style="padding-right: 50px;">
+    <%= f.submit "ログイン", class:"btn btn-primary"%>
+<%= render "devise/shared/links" %>
+  </div>
+</div>
+<% end %>
+
+<div class="field">
+
+
+<div style="background-color: #c0c0c0; margin: 30px; width: 140px;">登録がお済でない方</div>
+<div style="margin-left:100px;">
+<%= link_to "こちら", new_member_registration_path%>から新規登録を行ってください。
+</div>
+

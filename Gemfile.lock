@@ -160,6 +160,8 @@ GEM
     nokogiri (1.10.7)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
+    paranoia (2.4.2)
+      activerecord (>= 4.0, < 6.1)
     popper_js (1.16.0)
     pry (0.12.2)
       coderay (~> 1.1.0)
@@ -304,6 +306,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   listen (>= 3.0.5, < 3.2)
+  paranoia
   pry-byebug
   puma (~> 3.11)
   rails (~> 5.2.4, >= 5.2.4.1)

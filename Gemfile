@@ -77,4 +77,6 @@ gem 'bootstrap', '~> 4.3.1'
 
 gem 'jquery-rails'
 
+gem "paranoia"
+
 gem 'rails-i18n', '~> 5.1'

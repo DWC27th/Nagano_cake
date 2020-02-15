@@ -1,0 +1,72 @@
+
+<h2 style="margin: 28px;">会員編集画面</h2>
+    <div class="form-body">
+    <%= form_for(@member, url: admins_member_path) do |f| %>
+
+  <table style="width:50%" class="table table-condensed" cellspacing="0" cellpadding="5" bordercolor="#FFFFFF">
+
+        <tr>
+          <td border-style: none; bgcolor="#FFFFFF" align="left" nowrap style="border-style: none;">会員ID</td>
+            <td bgcolor="#FFFFFF" valign="top" width="150" style="border-style: none;">
+              <%= @member.id %>
+            </td>
+        </tr>
+　　　　　
+　　　　　<tr>
+          <td border-style: none; bgcolor="#FFFFFF" align="left" nowrap style="border-style: none;">氏名</td>
+            <td bgcolor="#FFFFFF" valign="top" width="150" style="border-style: none;">
+              <%= f.text_field :first_name %>
+                <%= f.text_field :last_name %>
+            </td>
+        </tr>
+
+        <tr>
+          <td bgcolor="#FFFFFF" align="left" nowrap style="border-style: none;">カナ</td>
+            <td bgcolor="#FFFFFF" valign="top" width="150" style="border-style: none;">
+              <%= f.text_field :first_name_kana,  {size:"10"} %>
+                <%= f.text_field :last_name_kana,  {size:"10"} %>
+            </td>
+        </tr>
+
+        <tr>
+          <td bgcolor="#FFFFFF" align="left" nowrap style="border-style: none;">郵便番号</td>
+            <td bgcolor="#FFFFFF" valign="top" width="150" style="border-style: none;">
+              <%= f.text_field :postal_code,  {size:"10"} %>
+            </td>
+        </tr>
+
+        <tr>
+          <td bgcolor="#FFFFFF" align="left" nowrap style="border-style: none;">住所</td>
+            <td bgcolor="#FFFFFF" valign="top" width="150" style="border-style: none;">
+              <%= f.text_field :address,  {size:"50"} %>
+            </td>
+        </tr>
+
+        <tr>
+          <td bgcolor="#FFFFFF" align="left" nowrap style="border-style: none;">メールアドレス</td>
+            <td bgcolor="#FFFFFF" valign="top" width="150" style="border-style: none;">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            </td>
+        </tr>
+
+        <tr>
+          <td bgcolor="#FFFFFF" align="left" nowrap style="border-style: none;">電話番号</td>
+            <td bgcolor="#FFFFFF" valign="top" width="150" style="border-style: none;">
+              <%= f.text_field :phone_number %>
+            </td>
+        </tr>
+
+        <tr>
+          <td bgcolor="#FFFFFF" align="left" nowrap style="border-style: none;">会員ステータス</td>
+            <td bgcolor="#FFFFFF" valign="top" width="150" style="border-style: none;">
+              <%= f.radio_button :member_status, :無効 %> 有効
+                <%= f.radio_button :member_status, :有効会員 %> 退会済み
+            </td>
+        </tr>
+　</table>
+
+        <div class="actions">
+          <%= f.submit "変更を保存する", class: "btn btn-primary",style:"margin-left: 30px;" %>
+        </div>
+      <% end %>
+    </div>
