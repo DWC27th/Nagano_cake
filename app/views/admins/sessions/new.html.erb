@@ -1,4 +1,6 @@
 
+<div style="text-align: center; margin-top:30px;">
+
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :メールアドレス %><br />
@@ -18,8 +20,10 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit "ログイン" %>
+    <%= f.submit "ログイン", class:"btn btn-primary" %>
   </div>
+</div>
 <% end %>
+
 
 

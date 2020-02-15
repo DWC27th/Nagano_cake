@@ -1,67 +1,76 @@
-<h2>新規登録</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-<div class="field">
-  <div><%= f.label :氏名 %>
-             <%= f.text_field :first_name %>
-  </div>
-    <div><%= f.label :last_name %>
-            <%= f.text_field :last_name %>
-    </div>
-</div>
-
-<div class="field">
-  <div><%= f.label :カナ %>
-             <%= f.text_field :first_name_kana %>
-  </div>
-    <div><%= f.label :last_name_kana %>
-             <%= f.text_field :last_name_kana %>
-    </div>
-</div>
-
-<div class="field">
-  <div><%= f.label :郵便番号 %>
-             <%= f.text_field :postal_code %>
-  </div>
-</div>
-
-<div class="field">
-  <div><%= f.label :住所 %>
-             <%= f.text_field :address %>
-  </div>
-</div>
 
 
-<div class="field">
-  <div><%= f.label :電話番号 %>
-             <%= f.text_field :phone_number %>
-  </div>
-</div>
+<h2 style="margin: 30px;">新規登録</h2>
 
 
-  <div class="field">
-    <%= f.label :メールアドレス %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :パスワード %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %>
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+      <table style="width:50%" class="table table-condensed" cellspacing="0" cellpadding="5" bordercolor="#FFFFFF">
 
-  <div class="field">
-    <%= f.label :パスワード（再） %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+        <tr>
+          <td border-style: none; bgcolor="#FFFFFF" align="left" nowrap style="border-style: none;">氏名</td>
+            <td bgcolor="#FFFFFF" valign="top" width="150" style="border-style: none;">
+              <%= f.text_field :first_name, {size:"10"} %>
+                <%= f.text_field :last_name,  {size:"10"} %>
+            </td>
+        </tr>
 
-  <div class="actions">
-    <%= f.submit "登録" %>
-  </div>
+        <tr>
+          <td bgcolor="#FFFFFF" align="left" nowrap style="border-style: none;">カナ</td>
+            <td bgcolor="#FFFFFF" valign="top" width="150" style="border-style: none;">
+              <%= f.text_field :first_name_kana,  {size:"10"} %>
+                <%= f.text_field :last_name_kana,  {size:"10"} %>
+            </td>
+        </tr>
+
+        <tr>
+          <td bgcolor="#FFFFFF" align="left" nowrap style="border-style: none;">郵便番号</td>
+            <td bgcolor="#FFFFFF" valign="top" width="150" style="border-style: none;">
+              <%= f.text_field :postal_code,  {size:"10"} %>
+            </td>
+        </tr>
+
+        <tr>
+          <td bgcolor="#FFFFFF" align="left" nowrap style="border-style: none;">住所</td>
+            <td bgcolor="#FFFFFF" valign="top" width="150" style="border-style: none;">
+              <%= f.text_field :address,  {size:"50"} %>
+            </td>
+        </tr>
+
+        <tr>
+          <td bgcolor="#FFFFFF" align="left" nowrap style="border-style: none;">メールアドレス</td>
+            <td bgcolor="#FFFFFF" valign="top" width="150" style="border-style: none;">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            </td>
+        </tr>
+
+        <tr>
+          <td bgcolor="#FFFFFF" align="left" nowrap style="border-style: none;">電話番号</td>
+            <td bgcolor="#FFFFFF" valign="top" width="150" style="border-style: none;">
+              <%= f.text_field :phone_number %>
+            </td>
+        </tr>
+
+        <tr>
+          <td bgcolor="#FFFFFF" align="left" nowrap style="border-style: none;">パスワード</td>
+            <td bgcolor="#FFFFFF" valign="top" width="150" style="border-style: none;">
+              <%= f.password_field :password, autocomplete: "new-password" %>
+            </td>
+        </tr>
+
+        <tr>
+          <td bgcolor="#FFFFFF" align="left" nowrap style="border-style: none;">パスワード（再）</td>
+            <td bgcolor="#FFFFFF" valign="top" width="150" style="border-style: none;">
+              <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+            </td>
+        </tr>
+      </table>
+
+
+      <div style="margin:30px;">
+        <%= f.submit "登録", class: "btn btn-primary" %>
+      </div>
+
 <% end %>
 
-<%= render "devise/shared/links" %>

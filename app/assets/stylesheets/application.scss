@@ -14,3 +14,29 @@
  *= require_self
  */
  @import "bootstrap";
+
+
+ * {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+
+
+
+h1 {
+	padding-left: 40px;
+	padding-top: 40px;
+}
+
+
+
+h4 {
+ 
+ fontsize: 30px;
+ margin-top: 50px;
+}
+.box {
+	background-image: url(Nagano_cake/app/assets/images/records/1.jpg);
+}
+
