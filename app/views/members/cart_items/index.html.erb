@@ -1,0 +1,79 @@
+<div class="container">
+
+  <div class="row justify-content-start mt-3 mb-1">
+    <h2 class="fas fa-shopping-cart"> ショッピングカート</h2>
+  </div>
+
+  <div class="row justify-content-end mb-3">
+　  <%= link_to "カートを空にする", members_cart_items_path, method: :delete, "data-confirm" => "カートを空にしてもよろしいですか？", class: "btn btn-danger" %>
+  </div>
+
+  <table class="table table-bordered">
+    <thead class="thead-light">
+      <tr>
+        <th>商品名</th>
+        <th>商品状態</th>
+        <th>単価(税込)</th>
+        <th>数量</th>
+        <th>数量</th>
+        <th>小計</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% cart_item_total_price = 0 %>
+      <% @shop_items.zip(@cart_items).each do |shop_item, cart_item| %>
+        <% shop_item_price_with_tax = (shop_item.price * 1.1).floor %>
+        <% cart_item_price = shop_item_price_with_tax * cart_item.quantity %>
+        <% cart_item_total_price = cart_item_total_price + cart_item_price %>
+        <tr>
+          <td><%= link_to shop_item.name, members_shop_item_path(shop_item.id) %></td>
+          <td>
+            <%= link_to (attachment_image_tag shop_item, :image, :fill, 50, 50,　format: 'jpeg', fallback: "no_image.jpg", size: 50, class: "mb-1"), members_shop_item_path(shop_item.id) %>
+            <% if shop_item.sale_status == "売切れ" || shop_item.genre.published_status == "無効" %>
+              <div class="badge badge-danger">売切れ</div>
+            <% end %>
+          </td>
+          <td><%= shop_item_price_with_tax.to_s(:delimited) %>円</td>
+          <td><%= cart_item.quantity %></td>
+          <td>
+            <%= form_for(cart_item, url: members_cart_item_path(cart_item.id)) do |f| %>
+              <%= f.text_field :quantity, size: "5" %>
+              <%= f.submit "変更", class: "btn btn-primary" %>
+            <% end %>
+          </td>
+          <td><%= cart_item_price.to_s(:delimited) %>円</td>
+          <td>
+            <%= link_to "削除する", members_cart_item_path(cart_item.id) , method: :delete, "data-confirm" => "削除してもよろしいですか？", class: "btn btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="row justify-content-around mt-3">
+    <div class="col-6">
+      <%= link_to "買い物を続ける", members_top_path, class: "btn btn-primary" %>
+    </div>
+    <div class="col-3 offset-3">
+      <table class="table table-bordered">
+        <tr>
+          <thead class="thead-light">
+            <th>合計金額</th>
+            <td><%= cart_item_total_price.to_s(:delimited) %>円</td>
+          </thead>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mt-3">
+    <div class="col-3">
+      <%= link_to "情報入力に進む", new_members_order_path, class: "btn btn-primary btn-lg" %>
+    </div>
+  </div>
+
+</div>
+
+
+

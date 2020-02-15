@@ -1,0 +1,47 @@
+<div class="container">
+
+  <div class="row">
+
+    <%= render partial: 'search_genres', locals: { genres: @genres } %>
+
+    <div class="col-9">
+      <div class="row justify-content-start mt-5">
+
+        <div class="col-4 offset-2">
+          <%= attachment_image_tag @shop_item, :image, :fill, 200, 200,　format: 'jpeg', fallback: "no_image.jpg", size: 200 %>
+        </div>
+
+        <div class="col-6">
+          <div class="row mb-3">
+            <h3><%= @shop_item.name %></h3>
+          </div>
+          <div class="row mb-3">
+            <%= @shop_item.introduction %>
+          </div>
+          <div class="row mb-3">
+            <h4>¥ <%= (@shop_item.price * 1.1).floor %>（税込）</h4>
+          </div>
+
+          <% if @shop_item.sale_status == "売切れ" %>
+            <div class="btn btn-danger active">売切れ</div>
+          <% else %>
+          　<div class="btn btn-success active">販売中</div>
+            <div class="row justify-content-end">
+              <%= form_for(@cart_item, url: members_cart_items_path) do |f| %>
+                <%= f.select :quantity, [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ], prompt: "個数選択" %>
+                <%= f.hidden_field :shop_item_id, value: @shop_item.id %>
+                <%= f.submit "カートに入れる", class: "btn btn-primary" %>
+              <% end %>
+            </div>
+          <% end %>
+
+        </div>
+
+     </div>
+    </div>
+
+  </div>
+
+
+
+</div>

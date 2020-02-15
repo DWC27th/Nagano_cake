@@ -1,21 +1,17 @@
 <div class="container">
 
-  <div class="row justify-content-start mt-3 mb-3">
-    <h2>商品一覧</h2>
-  </div>
+  <div class="row">
 
-  <table class="table">
-    <tbody>
-      <tr>
-        <% @shop_items.each do |shop_item| %>
-          <td>
-            <%= attachment_image_tag shop_item, :image, :fill, 100, 100,　format: 'jpeg', fallback: "no_image.jpg", size: 100 %>
-            <p><%= shop_item.name %></p>
-            <p><%= (shop_item.price*1.1).floor %>円</p>
-          </td>
-        <% end %>
-      </tr>
-    </tbody>
-  </table>
+    <%= render partial: 'search_genres', locals: { genres: @genres } %>
+
+    <div class="col-9">
+      <div class="row justify-content-start mt-3 mb-3">
+        <h2 class="fas fa-store"> 商品一覧</h2>
+      </div>
+
+      <%= render partial: 'shop_items_table', locals: { shop_items: @shop_items } %>
+    </div>
+
+  </div>
 
 </div>
