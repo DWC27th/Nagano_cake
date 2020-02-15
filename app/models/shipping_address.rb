@@ -1,8 +1,8 @@
 class ShippingAddress < ApplicationRecord
-  belongs_to :member, optional: true
+  belongs_to :member
 
-  #validates :postal_code, presence: { message: "can't be blank "}
-  #validates :address, presence: { message: "can't be blank "}
-  #validates :name, presence: { message: "can't be blank "}
+  validates :postal_code, presence: true #, length: { minimum: 7, maximum: 7 }
+  validates :address, presence: true
+  validates :name, presence: true
 
 end

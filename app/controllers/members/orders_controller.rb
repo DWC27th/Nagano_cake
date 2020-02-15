@@ -11,15 +11,15 @@ class Members::OrdersController < ApplicationController
 	end
 
 	def new
-  	    if current_member.shop_items.where(sale_status: "売切れ").blank? && Genre.where(id: current_member.shop_items.select(:genre_id), published_status: "無効").blank?  #カート商品の販売ステータス及びジャンルステータスが売切れ、無効でない場合
+  	    if current_member.shop_items.where(sale_status: "売切れ").blank? && Genre.where(id: current_member.shop_items.select(:genre_id), published_status: "無効").blank? && current_member.cart_items.present?  #カート商品の販売ステータス及びジャンルステータスが売切れ、無効でない場合
 		    @order = Order.new
 		    @order.member_id = current_member.id
-		    @shipping_addresses = ShippingAddress.all
 		    @order.order_status = 0
 		    @order.shipping_fee = 800
-		    @my_shipping_addresses = current_member.shipping_addresses
+		    @shipping_addresses = ShippingAddress.all
+    		@my_shipping_addresses = current_member.shipping_addresses
   	    else
-  	      redirect_to members_cart_items_path, alert: "大変申し訳ございません。売切れ商品がカートにございます。お手数ですが削除してから情報入力にお進みください。"
+  	      redirect_to members_cart_items_path, alert: "大変申し訳ございません。カートが空状態、もしくは売切れ商品がカートにございます。お手数ですが削除してから情報入力にお進みください。"
   	    end
 	end
 
@@ -28,6 +28,8 @@ class Members::OrdersController < ApplicationController
 		@cart_item = current_member.cart_items
 		@shop_items = ShopItem.all
 		@shop_item = current_member.shop_items
+		@shipping_addresses = ShippingAddress.all
+    	@my_shipping_addresses = current_member.shipping_addresses
 
 		@order = Order.new(order_params)
 		@order.member_id = current_member.id
@@ -35,7 +37,12 @@ class Members::OrdersController < ApplicationController
 		@order.shipping_fee = 800
 		@order.save
 
-		redirect_to members_order_complete_path
+		if @order.save
+	      redirect_to members_order_complete_path
+	  	else
+	      flash.now[:alert] = "#{@order.errors.count}件のエラーが有ります"
+	   	  render "new"
+	 	end
 	end
 
 	def confirm
@@ -49,6 +56,16 @@ class Members::OrdersController < ApplicationController
 
 		@shipping_addresses = ShippingAddress.all
     	@my_shipping_addresses = current_member.shipping_addresses
+    	if @order.member_id != 111 && @order.member_id != 222 && @order.member_id != 333
+    	   flash.now[:alert] = "いずれかのお届け先を選択ください"
+	       render "new"
+	 	elsif @order.member_id == 333
+	 		if @order.postal_code.empty? || @order.address.empty? || @order.name.empty?
+	 			#flash.now[:alert] = "新しいお届け先の記入項目に空欄がございます。ご入力願います"
+	 			flash.now[:alert] = "新しいお届け先の記入項目に#{@order.errors.count}件のエラーが有ります"
+	       		render "new"
+	 		end
+	 	end
 	end
 
 	def complete
