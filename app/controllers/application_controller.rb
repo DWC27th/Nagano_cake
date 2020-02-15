@@ -35,5 +35,6 @@ class ApplicationController < ActionController::Base
     added_attrs = [ :member_status, :email, :password, :password_confirmation, :last_name, :first_name, :last_name_kana, :first_name_kana,:postal_code, :address, :phone_number]
     devise_parameter_sanitizer.permit(:sign_up, keys: added_attrs)
     devise_parameter_sanitizer.permit(:account_update, keys: added_attrs)
+  end
 
 end
