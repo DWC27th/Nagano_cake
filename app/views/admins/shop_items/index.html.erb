@@ -23,7 +23,7 @@
       <% @shop_items.each do |shop_item| %>
         <tr>
           <td><%= shop_item.id %></td>
-          <td><%= link_to (attachment_image_tag shop_item, :image, :fill, 25, 25,　format: 'jpeg', fallback: "no_image.jpg", size: 25, class: "mb-1"), members_shop_item_path(shop_item.id) %></td>
+          <td><%= link_to (attachment_image_tag shop_item, :image, :fill, 25, 25,　format: 'jpeg', fallback: "no_image.jpg", size: 25, class: "mb-1"), admins_shop_item_path(shop_item.id) %></td>
           <td><%= link_to shop_item.name, admins_shop_item_path(shop_item.id) %></td>
           <td><%= shop_item.price.to_s(:delimited) %></td>
           <td><%= Genre.find(shop_item.genre_id).name %></td>

@@ -30,3 +30,23 @@ a{
 .pagination>li>a {
   color: #696969;   /*文字の色を変える*/
 }
+
+.shop{
+  position: relative;
+  color: #ffd5d5;
+  font-family: "Comic Sans MS";
+}
+
+.shop-title {
+  position: absolute;
+  top: 80px;
+  left: 60px;
+  font-size: 80px;
+}
+
+  .shop-subtitle {
+  position: absolute;
+  top: 189px;
+  left: 90px;
+  font-size: 30px;
+  }

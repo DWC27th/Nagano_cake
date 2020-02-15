@@ -12,13 +12,15 @@ class Members::ShopItemsController < ApplicationController
   end
 
   def index
-    if Genre.where(id: params[:genre_id]).present? #ジャンル検索フォームからlink_toで受け取ったパラメータのジャンルidがデータベースに存在する場合
+    if Genre.where(id: params[:genre_id]).present?  #ジャンル検索フォームからlink_toで受け取ったパラメータのジャンルidがデータベースに存在する場合
       @genre = Genre.find(params[:genre_id])
       #@genres = Genre.all
       if @genre.published_status == "有効" #ジャンルステータスが有効の場合
         @genres = Genre.where(published_status: "有効")  #ステータスが有効なジャンルのみ取得
         @shop_items = @genre.shop_items  #ジャンルに紐付く商品を取得
         @shop_items = @shop_items.page(params[:page])
+      else
+        redirect_back fallback_location: root_path
       end
     else
       redirect_back fallback_location: root_path

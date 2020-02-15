@@ -38,7 +38,7 @@
                 <% if admin_signed_in? %>
                   <li class="mx-3"><%= link_to '管理者Top', admins_top_path, class: "nav-link fas fa-home" %></li>
                   <li class="mx-3"><%= link_to '商品一覧', admins_shop_items_path, class: "nav-link fas fa-store" %></li>
-                  <li class="mx-3"><%= link_to 'ジャンル一覧', admins_genres_path, class: "nav-link fas fa-home" %></li>
+                  <li class="mx-3"><%= link_to 'ジャンル一覧', admins_genres_path, class: "nav-link fas fa-star" %></li>
                   <li class="mx-3"><%= link_to '管理者logout', destroy_admin_session_path, class: "nav-link fas fa-sign-out-alt", method: :delete %></li>
                   <li class="mx-3" style="color: yellow;">管理者ログイン中</li>
 
