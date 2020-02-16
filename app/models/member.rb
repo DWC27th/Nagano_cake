@@ -11,7 +11,7 @@ class Member < ApplicationRecord
   has_many :shipping_addresses, dependent: :destroy
 
 
-  enum member_status: {有効会員:0, 無効:1}
+
 
   acts_as_paranoid
 

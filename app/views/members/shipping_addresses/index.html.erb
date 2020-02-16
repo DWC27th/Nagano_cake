@@ -1,29 +1,27 @@
 <div class="container">
+	<h3>配送先登録・一覧</h3>
 	<div class="row">
-		<div class="col-xs-12">
-            <%= render partial: "/layouts/error_messages", locals: { model: @shipping_address } %>
-			<h3>配送先登録・一覧</h3>
-			<%= form_for(@shipping_address, url: members_shipping_addresses_path) do |shipping_address| %>
-				<div class="col-7">
-	      			<div class="field row mb-3">
-		      			<%= shipping_address.label :postal_code, "郵便番号", class: "col-4" %>
-		                <%= shipping_address.text_field :postal_code, class: "col-8" %>
-	            	</div>
-	            	<div class="field row mb-3">
-		      			<%= shipping_address.label :address, "住所", class: "col-4" %>
-		                <%= shipping_address.text_area :address, class: "col-8" %>
-	            	</div>
-	            	<div class="field row mb-3">
-		      			<%= shipping_address.label :name, "宛名", class: "col-4" %>
-		                <%= shipping_address.text_field :name, class: "col-8" %>
-	            	</div>
-	            </div>
-	            <div class="col-4">
-	                <div class="action col offset-2 mt-3">
-	                	<button type="submit" class="btn btn-primary btn-block">登録する</button>
-	                </div>
-            	</div>
-			<% end %>
+        <%= render partial: "/layouts/error_messages", locals: { model: @shipping_address } %>
+		<%= form_for(@shipping_address, url: members_shipping_addresses_path) do |shipping_address| %>
+			<div class="field row mb-3">
+	  			<%= shipping_address.label :postal_code, "郵便番号", class: "col-4" %>
+	            <%= shipping_address.text_field :postal_code, class: "col-8" %>
+	    	</div>
+	    	<div class="field row mb-3">
+	  			<%= shipping_address.label :address, "住所", class: "col-4" %>
+	            <%= shipping_address.text_area :address, class: "col-8" %>
+	    	</div>
+	    	<div class="field row mb-3">
+	  			<%= shipping_address.label :name, "宛名", class: "col-4" %>
+	            <%= shipping_address.text_field :name, class: "col-8" %>
+	    	</div>
+	    	<div class="mx-auto" style="width: 100px;">
+	    		<button type="submit" class="btn btn-primary btn-block">登録する</button>
+	    	</div>
+        <% end %>
+	</div>
+	<div class="row">
+		<div class="col-7">
 			<table class="table table-bordered">
 				<thead class="thead-light">
 				<tr>

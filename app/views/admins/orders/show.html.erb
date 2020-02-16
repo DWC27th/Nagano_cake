@@ -1,8 +1,8 @@
 <h1>注文履歴詳細</h1>
 <div class="container">
 　　<div class="row">
-		<div class="col-xs-12">
-			<table class="table">
+		<div class="col-5">
+			<table class="table table-bordered">
 				<h5>注文情報</h5>
 				<tr>
 					<th>購入者</th>
@@ -15,7 +15,7 @@
 								<% purchaser_name = "No" %>
 							<% end %>
 						<% end %>
-					<td><%= link_to "#{purchaser_name}", admins_member_path(@order.member_id) %></td><!-- 会員詳細ページに飛ぶかは未確認 -->
+					<td><%= link_to "#{purchaser_name}", admins_member_path(@order.member_id) %></td>
 				</tr>
 				<tr>
 					<th>配送先</th><td>〒<%= @order.postal_code %><br><%= @order.address %><br><%= @order.name %></td>
@@ -24,11 +24,14 @@
 					<th>支払方法</th><td><%= @order.payment_method %></td>
 				</tr>
 				<tr>
-					<th>注文ステータス</th><td>
-					<%= form_for(@order, url: admins_order_path, method: :patch) do |order|%>
-						<%= order.select :order_status, Order.order_statuses.keys, {} %>
-						<button type="submit" class="btn btn-primary btn-block">更新</button>
-					<% end %></td>
+					<th>注文ステータス</th>
+					<td>
+						<div class="col-6">
+							<%= form_for(@order, url: admins_order_path, method: :patch) do |order|%>
+							<%= order.select :order_status, Order.order_statuses.keys, {} %>
+							<button type="submit" class="btn btn-primary btn-block">更新</button>
+						<% end %>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -36,53 +39,59 @@
 </div>
 <div class="container">
 	<div class="row">
-		<div class="col-xs-8">
-			<table class="table">
-				<tr>
-					<th>商品名</th>
-					<th>単価（税込）[円]</th>
-					<th>数量</th>
-					<th>小計[円]</th>
-					<th>製作ステータス</th>
-				</tr>
-				<% @order_item.each do |order_item| %>
-	                <% order_item_price_with_tax = (order_item.price * 1.1).floor %>
-	                <% order_item_price = order_item_price_with_tax * order_item.quantity %>
-                <tr>
-	                <% shop_item_name = "" %>
-					<% @shop_items.each do |shop_item| %>
-						<% if shop_item.id == order_item.shop_item_id %>
-							<% shop_item_name = "#{shop_item.name}" %>
-							<% break %>
-						<% else %>
-							<% shop_item_name = "No" %>
-						<% end %>
-					<% end %>
-                    <td><%= shop_item_name %></td>
-                    <td><%= order_item_price_with_tax %></td>
-                    <td><%= order_item.quantity %></td>
-                    <td><%= order_item_price %></td>
-                    <td>
-	                  	<%= form_for(@order, url: admins_order_path, method: :patch) do |order| %>
-		                  	<%= order.hidden_field :member_id %>
-		                    <%= order.hidden_field :payment_method %>
-		                    <%= order.hidden_field :postal_code %>
-		                    <%= order.hidden_field :address %>
-		                    <%= order.hidden_field :name %>
-	                  		<%= order.hidden_field :order_status %>
-
-							<%= order.fields_for :order_items, OrderItem.find(order_item.id) do |order_item_status| %>
-								<%= order_item_status.select :production_status, OrderItem.production_statuses.keys, {} %>
+		<div class="col-8">
+			<table class="table table-bordered">
+				<thead class="thead-light">
+					<tr>
+						<th>商品名</th>
+						<th>単価（税込）[円]</th>
+						<th>数量</th>
+						<th>小計[円]</th>
+						<th>製作ステータス</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @order_item.each do |order_item| %>
+		                <% order_item_price_with_tax = (order_item.price * 1.1).floor %>
+		                <% order_item_price = order_item_price_with_tax * order_item.quantity %>
+	                <tr>
+		                <% shop_item_name = "" %>
+						<% @shop_items.each do |shop_item| %>
+							<% if shop_item.id == order_item.shop_item_id %>
+								<% shop_item_name = "#{shop_item.name}" %>
+								<% break %>
+							<% else %>
+								<% shop_item_name = "No" %>
 							<% end %>
-						<button type="submit" class="btn btn-primary btn-block">更新</button>
 						<% end %>
-					</td>
-                </tr>
-                <% end %>
+	                    <td><%= shop_item_name %></td>
+	                    <td><%= order_item_price_with_tax %></td>
+	                    <td><%= order_item.quantity %></td>
+	                    <td><%= order_item_price %></td>
+	                    <td>
+	                    	<div class="col-6">
+			                  	<%= form_for(@order, url: admins_order_path, method: :patch) do |order| %>
+				                  	<%= order.hidden_field :member_id %>
+				                    <%= order.hidden_field :payment_method %>
+				                    <%= order.hidden_field :postal_code %>
+				                    <%= order.hidden_field :address %>
+				                    <%= order.hidden_field :name %>
+			                  		<%= order.hidden_field :order_status %>
+
+									<%= order.fields_for :order_items, OrderItem.find(order_item.id) do |order_item_status| %>
+										<%= order_item_status.select :production_status, OrderItem.production_statuses.keys, {} %>
+									<% end %>
+									<button type="submit" class="btn btn-primary btn-block">更新</button>
+								<% end %>
+							</div>
+						</td>
+	                </tr>
+	                <% end %>
+	            </tbody>
 			</table>
 		</div>
-		<div class="col-xs-4">
-			<table class="table">
+		<div class="col-4">
+			<table class="table table-bordered">
 				<% order_item_total_price = 0 %>
 				<% @order_item.each do |order_item| %>
 	              <% order_item_price_with_tax = (order_item.price * 1.1).floor %>

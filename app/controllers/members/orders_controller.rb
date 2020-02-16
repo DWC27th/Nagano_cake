@@ -2,15 +2,18 @@ class Members::OrdersController < ApplicationController
 	def index
 		@orders = Order.all
 		@order = current_member.orders
-		#binding.pry
 		@order_items = OrderItem.all
-		@cart_items = CartItem.all
-		@cart_item = current_member.cart_items
+
 		@shop_items = ShopItem.all
-		@shop_item = current_member.shop_items
 	end
 
 	def new
+		#cart_items = CartItem.all
+		#cart_item = current_member.cart_items
+		#if cart_item.empty?
+	   	  #redirect_to members_top_path
+	   	#end
+
   	    if current_member.shop_items.where(sale_status: "売切れ").blank? && Genre.where(id: current_member.shop_items.select(:genre_id), published_status: "無効").blank? && current_member.cart_items.present?  #カート商品の販売ステータス及びジャンルステータスが売切れ、無効でない場合
 		    @order = Order.new
 		    @order.member_id = current_member.id
@@ -18,6 +21,7 @@ class Members::OrdersController < ApplicationController
 		    @order.shipping_fee = 800
 		    @shipping_addresses = ShippingAddress.all
     		@my_shipping_addresses = current_member.shipping_addresses
+    		@new_shipping_address = ShippingAddress.new
   	    else
   	      redirect_to members_cart_items_path, alert: "大変申し訳ございません。売切れ商品がカートにございます。お手数ですが削除してから情報入力にお進みください。"
   	    end
@@ -36,6 +40,17 @@ class Members::OrdersController < ApplicationController
 		@order.order_status = "入金待ち"
 		@order.shipping_fee = 800
 
+		@new_shipping_address = ShippingAddress.new
+		@new_shipping_address.member_id = current_member.id
+        @new_shipping_address.postal_code = @order.postal_code
+        @new_shipping_address.address = @order.address
+        @new_shipping_address.name = @order.name
+
+        @same_shipping_address = ShippingAddress.where(member_id: current_member.id).where(postal_code: @order.postal_code).where(address: @order.address).where(name: @order.name)
+      	if @same_shipping_address.empty?
+		    @new_shipping_address.save
+		end
+
 		if @order.save
 	      redirect_to members_order_complete_path
 	  	else
@@ -50,11 +65,11 @@ class Members::OrdersController < ApplicationController
 		@order.order_status = "入金待ち"
 		@cart_items = CartItem.all
 		@cart_item = current_member.cart_items
-		#binding.pry
 		@shop_items = ShopItem.all
 		@shop_item = current_member.shop_items
 
-		@shipping_addresses = ShippingAddress.all
+		@new_shipping_address = ShippingAddress.new
+
     	@my_shipping_addresses = current_member.shipping_addresses
     	if order_params[:payment_method].blank? && @order.member_id.blank?
 	 	  flash.now[:alert] = "支払方法、お届け先が入力されていません"
@@ -76,30 +91,22 @@ class Members::OrdersController < ApplicationController
 		@cart_items = CartItem.all
 		@cart_item = current_member.cart_items
 		@cart_item.destroy_all
-		#binding.pry
 	end
 
 	def show
 		@order = Order.find(params[:id])
 		@order_items = OrderItem.all
 		@order_item = @order.order_items
-		#binding.pry
 		@order.shipping_fee = 800
 		@cart_items = CartItem.all
 		@cart_item = current_member.cart_items
-		#binding.pry
 		@shop_items = ShopItem.all
 		@shop_item = current_member.shop_items
-
-		#@order_item = OrderItem.find(params[orders.id])
-		#@sum_price = 0
-		#@order_item.each do |order_item|
-			#@sum_price = @sum_price + (order_item.price * order_item.quantity)
-		#end
 	end
 
 	private
     def order_params
     	params.require(:order).permit(:member_id, :payment_method, :name, :postal_code, :address, :order_status, :shipping_fee, order_items_attributes:[:id, :order_id, :shop_item_id, :quantity, :price, :production_status])
     end
+
 end
