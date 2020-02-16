@@ -21,14 +21,36 @@
   box-sizing: border-box;
 }
 
+
+
+
+
+
 a{
   text-decoration: none;
   color: #333333;
 }
 
+
 /*ページネーション自体のデザイン*/
 .pagination>li>a {
   color: #696969;   /*文字の色を変える*/
+}
+
+
+
+h4 {
+ font-size: 30px;
+ margin-top: 50px;
+}
+
+.box {
+	background-image: url(records/1.jpg);
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-color: #464646;
 }
 
 .shop{
@@ -42,6 +64,7 @@ a{
   top: 80px;
   left: 60px;
   font-size: 80px;
+
 }
 
   .shop-subtitle {
@@ -49,5 +72,6 @@ a{
   top: 189px;
   left: 90px;
   font-size: 30px;
-  }
+
+}
 

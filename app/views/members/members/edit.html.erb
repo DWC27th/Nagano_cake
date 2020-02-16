@@ -1,17 +1,8 @@
 
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title></title>
-  <link rel="stylesheets" href="application.scss" >
-
-</head>
-<body>
-<div class="box"></div>
+<div class="box">
 
 
-<h4 style="margin-left: 28px; width:150px; display: inline-block;">会員編集画面</h4> <%= link_to"退会する", members_cancel_path, class: "btn btn-danger" ,style:"margin-bottom:10px;"%>
+<h4 style="margin: 28px; width:180px; display: inline-block;">会員編集画面</h4> <%= link_to"退会する", members_cancel_path, class: "btn btn-danger" ,style:"margin-bottom:10px;"%>
 
     <div class="form-body">
         <%= form_for(@member, url: members_member_path) do |f| %>
@@ -19,36 +10,36 @@
 
 
             <div style="margin-left: 28px;">
-                <table align="28" border="1" width="700" cellspacing="0" cellpadding="5" bordercolor="#333333">
+                <table align="28" border="1" width="700" cellspacing="0" cellpadding="5" bordercolor="#333333" background: rgba="(0,0,0,0.5)" >
 
                     <tr>
-                        <td bgcolor="#d3d3d3" align="left" nowrap><%= f.label :氏名 %></td>
-                        <td bgcolor="#FFFFFF" valign="top" width="500"><%= f.text_field :first_name %><%= f.text_field :last_name %></td>
+                        <td style="background: rgba(0,0,0,0.2);" align="left" nowrap><%= f.label :氏名 %></td>
+                        <td  valign="top" width="500"><%= f.text_field :first_name %><%= f.text_field :last_name %></td>
                     </tr>
 
                     <tr>
-                        <td bgcolor="#d3d3d3" align="left" nowrap>カナ</td>
-                        <td bgcolor="#FFFFFF" valign="top" width="500"><%= f.text_field :first_name_kana %><%= f.text_field :last_name_kana %></td>
+                        <td style="background: rgba(0,0,0,0.2);" align="left" nowrap>カナ</td>
+                        <td  valign="top" width="500"><%= f.text_field :first_name_kana %><%= f.text_field :last_name_kana %></td>
                     </tr>
 
                     <tr>
-                        <td bgcolor="#d3d3d3" align="left" nowrap>郵便番号</td>
-                        <td bgcolor="#FFFFFF" valign="top" width="500"><%= f.text_field :postal_code %></td>
+                        <td style="background: rgba(0,0,0,0.2);" align="left" nowrap>郵便番号</td>
+                        <td  valign="top" width="500"><%= f.text_field :postal_code %></td>
                     </tr>
 
                     <tr>
-                        <td bgcolor="#d3d3d3" align="left" nowrap>住所</td>
-                        <td bgcolor="#FFFFFF" valign="top" width="500"><%= f.text_field :address %></td>
+                        <td style="background: rgba(0,0,0,0.2);" align="left" nowrap>住所</td>
+                        <td  valign="top" width="500"><%= f.text_field :address %></td>
                     </tr>
 
                     <tr>
-                        <td bgcolor="#d3d3d3" align="left" nowrap>電話番号</td>
-                        <td bgcolor="#FFFFFF" valign="top" width="500"><%= f.text_field :phone_number %></td>
+                        <td style="background: rgba(0,0,0,0.2);" align="left" nowrap>電話番号</td>
+                        <td  valign="top" width="500"><%= f.text_field :phone_number %></td>
                     </tr>
 
                     <tr>
-                        <td bgcolor="#d3d3d3" align="left" nowrap>メールアドレス</td>
-                        <td bgcolor="#FFFFFF" valign="top" width="500"><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+                        <td style="background: rgba(0,0,0,0.2);" align="left" nowrap>メールアドレス</td>
+                        <td  valign="top" width="500"><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
                     </tr>
                 </table>
             </div>
@@ -59,7 +50,6 @@
         <% end %>
 
     </div>
-
-    </body>
-</html>
+<br>
+</div>
 
