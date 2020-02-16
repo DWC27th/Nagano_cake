@@ -4,7 +4,7 @@ class Order < ApplicationRecord
   accepts_nested_attributes_for :order_items
 
   validates :payment_method, presence: true
-  validates :postal_code, presence: true #, length: { minimum: 7, maximum: 7 }
+  validates :postal_code, presence: true
   validates :address, presence: true
   validates :name, presence: true
 

@@ -21,11 +21,13 @@
 
         <nav class="navbar-nav">
           <ul class="nav justify-content-end"  style="font-size: 12px;">
-
+            <% url_array = request.url.split('/') %>
+            <% if url_array[3] == "members" %>
                 <% if member_signed_in? %>
                   <li class="mx-3"><%= link_to '会員top', members_top_path, class: "nav-link fas fa-store" %></li>
                   <li class="mx-3"><%= link_to 'About', members_about_path, class: "nav-link fas fa-user" %></li>
                   <li class="mx-3"><%= link_to 'カート', members_cart_items_path, class: "nav-link fas fa-shopping-cart" %></li>
+                  <li class="mx-3"><%= link_to 'マイページ', members_member_path(current_member.id), class: "nav-link fas fa-user" %></li>
                   <li class="mx-3"><%= link_to '会員logout', destroy_member_session_path, class: "nav-link fas fa-sign-out-alt", method: :delete %></li>
                   <li class="mx-3" style="color: yellow;">会員ログイン中</li>
 
@@ -34,13 +36,14 @@
                   <li class="mx-3"><%= link_to '会員login', new_member_session_path, class: "nav-link fas fa-sign-in-alt" %></li>
                   <li class="mx-3" style="color: red;">会員ログアウト中</li>
                 <% end %>
-
+            <% elsif url_array[3] == "admins" %>
                 <% if admin_signed_in? %>
 
                   <li class="mx-3"><%= link_to '管理者Top', admins_top_path, class: "nav-link fas fa-home" %></li>
                   <li class="mx-3"><%= link_to '商品一覧', admins_shop_items_path, class: "nav-link fas fa-store" %></li>
                   <li class="mx-3"><%= link_to 'ジャンル一覧', admins_genres_path, class: "nav-link fas fa-star" %></li>
                   <li class="mx-3"><%= link_to '注文履歴一覧', admins_orders_path, class: "nav-link fas fa-home" %></li>
+                  <li class="mx-3"><%= link_to '会員一覧', admins_members_path, class: "nav-link fas fa-user" %></li>
                   <li class="mx-3"><%= link_to '管理者logout', destroy_admin_session_path, class: "nav-link fas fa-sign-out-alt", method: :delete %></li>
                   <li class="mx-3" style="color: yellow;">管理者ログイン中</li>
 
@@ -49,7 +52,8 @@
                   <li class="mx-3"><%= link_to '管理者登録', admin_session_path, class: "nav-link fas fa-sign-in-alt" %></li>
                   <li class="mx-3" style="color: red;">管理者ログアウト中</li>
                 <% end %>
-
+            <% else %>
+            <% end %>
           </ul>
         </nav>
         </div>

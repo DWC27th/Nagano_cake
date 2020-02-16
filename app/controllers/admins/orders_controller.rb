@@ -1,10 +1,6 @@
 class Admins::OrdersController < ApplicationController
-
-<<<<<<< HEAD
 	def top
 		@orders = Order.all
-		#today = Time.now.day
-		#@today_orders = Order.where('extract(day from created_at) = ?', today)
 		@today_orders_num = 0
 		@orders.each do |order|
 			if (order[:created_at].to_s.match(/#{Date.today.to_s}.+/))
@@ -21,15 +17,7 @@ class Admins::OrdersController < ApplicationController
 
 		@orders = Order.all
 		@order_items = OrderItem.all
-		#@order_item = current_member.order_items
-		@cart_items = CartItem.all
-		@cart_item = current_member.cart_items
-		#binding.pry
-		@shop_items = ShopItem.all
-		@shop_item = current_member.shop_items
-
 		@members = Member.all
-		#@members = Member.where(id: @orders.member_id)
 	end
 
 	def show
@@ -37,17 +25,13 @@ class Admins::OrdersController < ApplicationController
 		@order_items = OrderItem.all
 		@order_item = @order.order_items
 		@order.shipping_fee = 800
-		@cart_items = CartItem.all
-		@cart_item = current_member.cart_items
 
 		@shop_items = ShopItem.all
-		@shop_item = current_member.shop_items
 
 		@members = Member.all
 	end
 
 	def update
-		#@a = 0
 	  	@order = Order.find(params[:id])
 	  	@order_items = OrderItem.all
 		@order_item = @order.order_items
@@ -73,15 +57,7 @@ class Admins::OrdersController < ApplicationController
 				end
 			end
 		end
-		# binding.pry
-		# @order.update(order_params)
-		# binding.pry
-	    #if @order.update(order_params)
-	    #  flash[:notice] = "Status was successfully updated."
 	      redirect_to admins_order_path(@order)
-	    #else
-	    #  render action: :edit
-	    #end
   	end
 
   	private

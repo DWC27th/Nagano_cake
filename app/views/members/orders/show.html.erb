@@ -1,8 +1,8 @@
 <h1>注文履歴詳細</h1>
 <div class="container">
 	<div class="row">
-		<div class="col-xs-8">
-			<table class="table">
+		<div class="col-7">
+			<table class="table table-bordered">
 				<h5>注文情報</h5>
 				<tr>
 					<th>注文日</th><td><%= @order.created_at %></td>
@@ -18,8 +18,8 @@
 				</tr>
 			</table>
 		</div>
-		<div class="col-xs-4">
-			<table class="table">
+		<div class="col-5">
+			<table class="table table-bordered">
 				<h5>請求情報</h5>
 				<% order_item_total_price = 0 %>
 				<% @order_item.each do |order_item| %>
@@ -42,34 +42,38 @@
 </div>
 <div class="container">
 	<div class="row">
-		<div class="col-xs-12">
+		<div class="col-6">
 			<h5>注文内容</h5>
-			<table class="table">
-				<tr>
-                <th>商品</th>
-                <th>単価（税込）[円]</th>
-                <th>個数</th>
-                <th>小計[円]</th>
-              </tr>
-              <% @order_item.each do |order_item| %>
-	              <% order_item_price_with_tax = (order_item.price * 1.1).floor %>
-	              <% order_item_price = order_item_price_with_tax * order_item.quantity %>
-                  <tr>
-                  	<% shop_item_name = "" %>
-				<% @shop_items.each do |shop_item| %>
-					<% if shop_item.id == order_item.shop_item_id %>
-						<% shop_item_name = "#{shop_item.name}" %>
-						<% break %>
-					<% else %>
-						<% shop_item_name = "No" %>
-					<% end %>
-				<% end %>
-                  <td><%= shop_item_name %></td>
-                    <td><%= order_item_price_with_tax %></td>
-                    <td><%= order_item.quantity %></td>
-                    <td><%= order_item_price %></td>
-                  </tr>
-              <% end %>
+			<table class="table table-bordered">
+				<thead class="thead-light">
+					<tr>
+	                <th>商品</th>
+	                <th>単価（税込）[円]</th>
+	                <th>個数</th>
+	                <th>小計[円]</th>
+	                </tr>
+                </thead>
+				<tbody>
+		            <% @order_item.each do |order_item| %>
+			            <% order_item_price_with_tax = (order_item.price * 1.1).floor %>
+			            <% order_item_price = order_item_price_with_tax * order_item.quantity %>
+		                <tr>
+		                	<% shop_item_name = "" %>
+						<% @shop_items.each do |shop_item| %>
+							<% if shop_item.id == order_item.shop_item_id %>
+								<% shop_item_name = "#{shop_item.name}" %>
+								<% break %>
+							<% else %>
+								<% shop_item_name = "No" %>
+							<% end %>
+						<% end %>
+		                <td><%= shop_item_name %></td>
+		                  <td><%= order_item_price_with_tax %></td>
+		                  <td><%= order_item.quantity %></td>
+		                  <td><%= order_item_price %></td>
+		                </tr>
+		            <% end %>
+		        </tbody>
 			</table>
 		</div>
     </div>
