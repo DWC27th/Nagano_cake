@@ -20,9 +20,14 @@
           <td><%= link_to "#{member.first_name}" + "#{member.last_name}", admins_member_path(member.id), :style=>"color:black;text-decoration: underline;"  %>
           </td>
             <td><%= member.email %></td>
-              <td><%= member.member_status %></td>
+              <td><% if member.deleted_at.present? %>
+                      <%= "無効会員" %>
+                        <% else %>
+                          <%= "有効会員" %>
+                            <% end %>
+              </td>
       </tr>
-  <% end %>
+    <% end %>
   </tbody>
 　
 </table>

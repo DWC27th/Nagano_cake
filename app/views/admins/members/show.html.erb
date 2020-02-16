@@ -7,7 +7,15 @@
 
                     <tr>
                         <td bgcolor="#d3d3d3" align="left" nowrap>会員ID</td>
-                        <td bgcolor="#FFFFFF" valign="top" width="500"><%= @member.id %> <div style="background-color: #87ceeb; width: 60px; display:inline-block; margin-left:5px; border-radius: 10px; text-align: center;"><%= @member.member_status%></td></div>
+                        <td bgcolor="#FFFFFF" valign="top" width="500"><%= @member.id %>
+                            <div style="background-color: #87ceeb; width: 80px; display:inline-block; margin-left:5px; border-radius: 10px; text-align: center;">
+                                    <% if @member.deleted_at.present? %>
+                                        <%= "無効会員" %>
+                                            <% else %>
+                                                <%= "有効会員" %>
+                                                    <% end %>
+                            </div>
+                        </td>
                     </tr>
 
                     <tr>

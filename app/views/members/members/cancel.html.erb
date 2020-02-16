@@ -7,12 +7,10 @@
 退会する場合は『退会する』をクリックしてください。</p>
 
 <div class="form-body">
-    <%= form_for(@member, url: members_member_path) do |f| %>
+    <%= form_for(@member, url: members_member_path, method: :delete) do |f| %>
 
         <div class="actions" style="text-align:center;">
-
-            <%= f.hidden_field :member_status, :value => 1 %>
-            <%=  link_to "退会する",members_top_path, method: :delete, class: "btn btn-danger" %>
+            <%= f.submit "退会する", class: "btn btn-danger" %>
             <%= link_to "退会しない",members_member_path(@member.id), class: "btn btn-primary" %>
         </div>
     <% end %>
