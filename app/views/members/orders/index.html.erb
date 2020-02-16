@@ -1,42 +1,60 @@
 <div class="container">
 	<div class="row">
-		<div class="col-xs-12">
+		<div class="col-12">
 			<h1>注文履歴一覧</h1>
-			<table class="table">
-				<tr>
-					<th>注文日</th>
-					<th>配送先</th>
-					<th>注文商品</th>
-					<th>支払金額</th>
-					<th>ステータス</th>
-					<th>注文詳細</th>
-				</tr>
-				<% @order.each do |order| %>
+			<table class="table table-bordered">
+				<thead class="thead-light">
 					<tr>
-						<td><%= order.created_at %></td>
-						<td><%= order.postal_code %><br><%= order.address %><br><%= order.name %></td>
-						<td>
-							<% @shop_item.each do |shop_item| %>
-						       <%= shop_item.name %><br>
-							<% end %>
-		                </td>
-						<td>
-						<% order_item_total_price = 0 %>
-						<% @order_items.each do |order_item| %>
-							<% if order_item.order_id == order.id %>
-						        <% order_item_price_with_tax = (order_item.price * 1.1).floor %>
-						        <% order_item_price = order_item_price_with_tax * order_item.quantity %>
-						        <% order_item_total_price = order_item_total_price + order_item_price %>
-							<% end %>
-						<% end %>
-							<%= order_item_total_price + order.shipping_fee %>円</td>
-						<td><%= order.order_status %></td>
-						<td><%= link_to "表示する", members_order_path(order.id) %></td>
+						<th>注文日</th>
+						<th>配送先</th>
+						<th>注文商品</th>
+						<th>支払金額</th>
+						<th>ステータス</th>
+						<th>注文詳細</th>
 					</tr>
-				<% end %>
+				</thead>
+				<tbody>
+					<% @order.each do |order| %>
+						<tr>
+							<td><%= order.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+							<td><%= order.postal_code %><br><%= order.address %><br><%= order.name %></td>
+							<td>
+								<% @order_items.each do |order_item| %>
+									<% if order_item.order_id == order.id %>
+										<% shop_item_name = "" %>
+										<% @shop_items.each do |shop_item| %>
+											<% if shop_item.id == order_item.shop_item_id %>
+												<% shop_item_name = "#{shop_item.name}" %>
+												<% break %>
+											<% else %>
+												<% shop_item_name = "No" %>
+											<% end %>
+										<% end %>
+										<%= shop_item_name %><br>
+									<% end %>
+								<% end %>
+		                	</td>
+							<td>
+							<% order_item_total_price = 0 %>
+							<% @order_items.each do |order_item| %>
+								<% if order_item.order_id == order.id %>
+							        <% order_item_price_with_tax = (order_item.price * 1.1).floor %>
+							        <% order_item_price = order_item_price_with_tax * order_item.quantity %>
+							        <% order_item_total_price = order_item_total_price + order_item_price %>
+								<% end %>
+							<% end %>
+								<%= order_item_total_price + order.shipping_fee %>円</td>
+							<td><%= order.order_status %></td>
+							<td><%= link_to "表示する", members_order_path(order.id) %></td>
+						</tr>
+					<% end %>
+				</tbody>
 			</table>
 		</div>
     </div>
+    <!-- <div class="row justify-content-center mt-3">
+    	<%#= paginate @order, class: "paginate" %>
+  </div> -->
 </div>
 
 

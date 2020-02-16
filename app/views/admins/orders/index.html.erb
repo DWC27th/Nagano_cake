@@ -1,37 +1,45 @@
 <div class="container">
 	<div class="row">
-		<div class="col-xs-12">
-			<h1>注文一覧画面</h1>
-			<table class="table">
-				<tr>
-					<th>購入日時</th>
-					<th>購入者</th>
-					<th>注文個数</th>
-					<th>注文ステータス</th>
-				</tr>
-				<!-- 遷移元：会員詳細ページ（admin用） -->
-				<% if @before_controller == "admins/members" && @before_action == "show" %>
-					<% @orders.each do |order| %>
-						<% if order.member_id == member.id %><!-- 会員idを取得する必要あり -->
-							<%= render partial: "order_table", locals: { order: order } %>
+			<div class="col-8 mx-auto">
+				<h1>注文一覧画面</h1>
+				<table class="table table-bordered">
+					<thead class="thead-light">
+						<tr>
+							<th>購入日時</th>
+							<th>購入者</th>
+							<th>注文個数</th>
+							<th>注文ステータス</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- 遷移元：会員詳細ページ（admin用） -->
+						<% if @before_controller == "admins/members" && @before_action == "show" %>
+						<% member_id = request.referer.split('/') %>
+							<% @orders.each do |order| %>
+								<% if order.member_id == member_id[-1].to_i %>
+									<%= render partial: "order_table", locals: { order: order } %>
+								<% end %>
+							<% end %>
+						<!-- 遷移元：管理者トップページ -->
+						<% elsif @before_controller == "admins/orders" && @before_action == "top" %>
+							<% @orders.each do |order| %>
+								<% if (order[:created_at].to_s.match(/#{Date.today.to_s}.+/)) %>
+									<%= render partial: "order_table", locals: { order: order } %>
+								<% end %>
+							<% end %>
+						<!-- 遷移元：ヘッダー -->
+						<% else %>
+							<% @orders.each do |order| %>
+								<%= render partial: "order_table", locals: { order: order } %>
+							<% end %>
 						<% end %>
-					<% end %>
-				<!-- 遷移元：管理者トップページ -->
-				<% elsif @before_controller == "admins/orders" && @before_action == "top" %>
-					<% @orders.each do |order| %>
-						<% if (order[:created_at].to_s.match(/#{Date.today.to_s}.+/)) %>
-							<%= render partial: "order_table", locals: { order: order } %>
-						<% end %>
-					<% end %>
-				<!-- 遷移元：ヘッダー -->
-				<% else %>
-					<% @orders.each do |order| %>
-						<%= render partial: "order_table", locals: { order: order } %>
-					<% end %>
-				<% end %>
-			</table>
-		</div>
-    </div>
+					</tbody>
+				</table>
+			</div>
+	    </div>
+    <!-- <div class="row justify-content-center mt-3">
+	    <%#= paginate @orders, class: "paginate" %>
+	</div> -->
 </div>
 
 
