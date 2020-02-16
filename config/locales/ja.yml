@@ -15,6 +15,35 @@ ja:
           genre_id: ジャンルID
 
 
+        admin:
+          email: Eメール
+          encrypted_password: パスワード
+
+
+        member:
+          email: Eメール
+          password: パスワード
+          last_name: 苗字
+          last_name_kana: 苗字（カナ）
+          first_name: 名前
+          first_name_kana: 名前（カナ）
+          postal_code: 郵便番号
+          address: 住所
+          phone_number: 電話番号
+
+
+        order:
+          payment_method: 支払方法
+          postal_code: 郵便番号
+          address: 住所
+          name: 宛名
+
+        shipping_address:
+          postal_code: 郵便番号
+          address: 住所
+          name: 宛名
+
+
   views:
     pagination:
       first: "最初"

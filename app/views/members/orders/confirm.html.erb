@@ -71,6 +71,7 @@
                   <%= order.hidden_field :name %>
                       <% @shop_item.zip(@cart_item).each do |shop_item, cart_item| %>
                           <%= order.fields_for :order_items, OrderItem.new do |order_item| %>
+
                             <%= order_item.hidden_field :order_id, :value => @order.id %>
                             <%= order_item.hidden_field :shop_item_id, :value => shop_item.id %>
                             <%= order_item.hidden_field :quantity, :value => cart_item.quantity %>

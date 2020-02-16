@@ -19,7 +19,7 @@ class Members::OrdersController < ApplicationController
 		    @shipping_addresses = ShippingAddress.all
     		@my_shipping_addresses = current_member.shipping_addresses
   	    else
-  	      redirect_to members_cart_items_path, alert: "大変申し訳ございません。カートが空状態、もしくは売切れ商品がカートにございます。お手数ですが削除してから情報入力にお進みください。"
+  	      redirect_to members_cart_items_path, alert: "大変申し訳ございません。売切れ商品がカートにございます。お手数ですが削除してから情報入力にお進みください。"
   	    end
 	end
 
@@ -35,11 +35,11 @@ class Members::OrdersController < ApplicationController
 		@order.member_id = current_member.id
 		@order.order_status = "入金待ち"
 		@order.shipping_fee = 800
-		@order.save
 
 		if @order.save
 	      redirect_to members_order_complete_path
 	  	else
+	  	  binding.pry
 	      flash.now[:alert] = "#{@order.errors.count}件のエラーが有ります"
 	   	  render "new"
 	 	end
@@ -56,15 +56,19 @@ class Members::OrdersController < ApplicationController
 
 		@shipping_addresses = ShippingAddress.all
     	@my_shipping_addresses = current_member.shipping_addresses
-    	if @order.member_id != 111 && @order.member_id != 222 && @order.member_id != 333
-    	   flash.now[:alert] = "いずれかのお届け先を選択ください"
-	       render "new"
+    	if order_params[:payment_method].blank? && @order.member_id.blank?
+	 	  flash.now[:alert] = "支払方法、お届け先が入力されていません"
+	 	  render "new"
+    	elsif @order.member_id.blank?
+	 	  flash.now[:alert] = "お届け先が入力されていません"
+	 	  render "new"
 	 	elsif @order.member_id == 333
-	 		if @order.postal_code.empty? || @order.address.empty? || @order.name.empty?
-	 			#flash.now[:alert] = "新しいお届け先の記入項目に空欄がございます。ご入力願います"
-	 			flash.now[:alert] = "新しいお届け先の記入項目に#{@order.errors.count}件のエラーが有ります"
-	       		render "new"
-	 		end
+	 	  @order.save
+	 	  @order.errors.delete(:member)
+	 	  if @order.errors.present?
+	 	    flash.now[:alert] = "#{@order.errors.count}件のエラーが有ります"
+	 	    render "new"
+	 	  end
 	 	end
 	end
 
