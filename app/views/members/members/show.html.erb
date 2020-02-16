@@ -1,9 +1,13 @@
-<h3 style="margin: 20px;">マイページ</h3>
 
-<bosy class=background-image></body>
+<div class="box">
 
 
-    <h5 style="padding: 20px 0px 10px 28px;">登録情報</h4>
+    <h3 style="margin: 20px;">マイページ</h3>
+
+
+
+
+    <h5 style="padding: 20px 0px 10px 28px;">登録情報</h5>
     <div style="padding: 0px 0px 20px 28px ;"><%= link_to"編集する", edit_members_member_path(@member.id), class: "btn btn-primary"  %> 
 	    <button style="margin: 10px;" class="btn btn-primary">パスワードを変更する</button>
     </div>
@@ -30,6 +34,13 @@
                                 <td bgcolor="#FFFFFF" valign="top" width="500"><%= @member.address %></td>
                             </tr>
 
+                            <tr>
+                                <td bgcolor="#d3d3d3" align="left" nowrap>電話番号</td>
+                                <td bgcolor="#FFFFFF" valign="top" width="500"><%= @member.phone_number %></td>
+                            </tr>
+
+
+
                                 <tr>
                                     <td bgcolor="#d3d3d3" align="left" nowrap>メールアドレス</td>
                                     <td bgcolor="#FFFFFF" valign="top" width="500"><%= @member.email %></td>
@@ -38,7 +49,11 @@
         </div>
 
 
-<h5 style="margin: 28px;">配送先   <%= link_to"一覧を見る", members_shipping_adresses_path, class: "btn btn-primary" ,style:"margin-left:18px;" %></h5>
-<h5 style="margin: 28px;">注文履歴  <%= link_to"一覧を見る", members_orders_path, class: "btn btn-primary" %></h5>
+            <h5 style="margin: 28px;">配送先   <%= link_to"一覧を見る", members_shipping_addresses_path, class: "btn btn-primary" ,style:"margin-left:18px;" %></h5>
+            <h5 style="margin: 28px;">注文履歴  <%= link_to"一覧を見る", members_orders_path, class: "btn btn-primary" %></h5>
 
+
+
+<br>
+</div>
 
