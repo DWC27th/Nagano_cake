@@ -8,13 +8,15 @@ class Members::OrdersController < ApplicationController
 	end
 
 	def new
-		#cart_items = CartItem.all
-		#cart_item = current_member.cart_items
-		#if cart_item.empty?
-	   	  #redirect_to members_top_path
-	   	#end
+		#url_array = request.url.split('/')
+        #unless url_array[3] == "members" && url_array[4] == "orders" && url_array[5] == "new"
+	    	#redirect_to members_top_path
+	    #end
 
-  	    if current_member.shop_items.where(sale_status: "売切れ").blank? && Genre.where(id: current_member.shop_items.select(:genre_id), published_status: "無効").blank? && current_member.cart_items.present?  #カート商品の販売ステータス及びジャンルステータスが売切れ、無効でない場合
+		if current_member.shop_items.where(sale_status: "売切れ").blank? && Genre.where(id: current_member.shop_items.select(:genre_id), published_status: "無効").blank? && current_member.cart_items.present?  #カート商品の販売ステータス及びジャンルステータスが売切れ、無効でない場合
+		#if current_member.cart_items.blank?
+			#redirect_to members_top_path
+  	    #elsif current_member.shop_items.where(sale_status: "売切れ").blank? && Genre.where(id: current_member.shop_items.select(:genre_id), published_status: "無効").blank?  #カート商品の販売ステータス及びジャンルステータスが売切れ、無効でない場合
 		    @order = Order.new
 		    @order.member_id = current_member.id
 		    @order.order_status = 0
@@ -54,7 +56,7 @@ class Members::OrdersController < ApplicationController
 		if @order.save
 	      redirect_to members_order_complete_path
 	  	else
-	  	  binding.pry
+	  	  #binding.pry
 	      flash.now[:alert] = "#{@order.errors.count}件のエラーが有ります"
 	   	  render "new"
 	 	end

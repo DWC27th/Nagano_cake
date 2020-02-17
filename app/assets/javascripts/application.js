@@ -10,10 +10,19 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
-//= require turbolinks
 //= require jquery3
+//= require rails-ujs
+//= require jquery.turbolinks
+//= require turbolinks
 //= require popper
 //= require cocoon
 //= require bootstrap
 //= require_tree .
+
+history.pushState(null, null, null);
+$(window).on("popstate", function (event) {
+  if (!event.originalEvent.state) {
+    history.pushState(null, null, null);
+    return;
+  }
+});

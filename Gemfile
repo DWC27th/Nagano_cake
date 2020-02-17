@@ -80,3 +80,5 @@ gem 'jquery-rails'
 gem "paranoia"
 
 gem 'rails-i18n', '~> 5.1'
+
+gem 'jquery-turbolinks'
