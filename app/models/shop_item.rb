@@ -11,8 +11,8 @@ class ShopItem < ApplicationRecord
   attachment :image
 
   validates :genre_id, presence: true
-  validates :name, presence: true, length: {maximum: 50}
-  validates :introduction, presence: true, length: {maximum: 100}
+  validates :name, presence: true
+  validates :introduction, presence: true
   validates :price, presence: true
   validates :sale_status, presence: true
 

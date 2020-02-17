@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
 
   devise_for :members
-  devise_for :admins, controllers: {
-    sessions: 'admins/sessions'
-  }
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  devise_for :admins, skip: :all
+  devise_scope :admin do
+    get 'admins/sign_in' => 'admins/sessions#new', as: :new_admin_session
+    post 'admins/sign_in' => 'admins/sessions#create', as: :admin_session
+    delete 'admins/sign_out' => 'admins/sessions#destroy', as: :destroy_admin_session
+  end
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 
   namespace :members do
@@ -24,7 +27,6 @@ Rails.application.routes.draw do
     get 'members/:id/edit/cancel' => 'members#cancel', as: 'cancel'
     put 'members/:id' => 'members#withdraw', as: 'withdraw_put'
     patch 'members/:id' => 'members#withdraw', as: 'withdraw_patch'
-
   end
 
     root 'members/shop_items#top'
@@ -36,7 +38,5 @@ Rails.application.routes.draw do
   	resources :genres, only: [:index, :create, :edit, :update]
     get 'top' => 'orders#top', as: 'top'
   end
-
-  #root 'admins/orders#top'
 
 end

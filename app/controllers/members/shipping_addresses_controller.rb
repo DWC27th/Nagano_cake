@@ -14,14 +14,15 @@ class Members::ShippingAddressesController < ApplicationController
 
     @same_shipping_address = ShippingAddress.where(member_id: current_member.id).where(postal_code: @shipping_address.postal_code).where(address: @shipping_address.address).where(name: @shipping_address.name)
     if @same_shipping_address.empty?
-      @shipping_address.save
-      redirect_to members_shipping_addresses_path, notice: "配送先住所が新規登録されました"
+      if @shipping_address.save
+        redirect_to members_shipping_addresses_path, notice: "配送先住所が新規登録されました"
+      else
+        flash.now[:alert] = "#{@shipping_address.errors.count}件のエラーが有ります"
+        render "index"
+      end
     elsif @same_shipping_address.present?
       flash.now[:alert] = "既に配送先住所に含まれております。"
       render "index"
-  	else
-      flash.now[:alert] = "#{@shipping_address.errors.count}件のエラーが有ります"
-   		render "index"
  	  end
 	end
 
