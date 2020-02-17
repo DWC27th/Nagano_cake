@@ -20,4 +20,12 @@ class Member < ApplicationRecord
   validates :address, presence: true
   validates :phone_number, presence: true, format: { with: /\A\d{10,11}\z/, message: "は10〜11桁の整数で入力してください。" }
 
+  def self.search(search)
+    if search
+      Member.where(['last_name LIKE ?', "%#{search}%"])
+    else
+      Member.all
+    end
+  end
+
 end

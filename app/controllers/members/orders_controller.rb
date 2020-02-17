@@ -3,7 +3,7 @@ class Members::OrdersController < ApplicationController
 
 	def index
 		@orders = Order.all
-		@order = current_member.orders
+		@order = current_member.orders.page(params[:page])
 		@order_items = OrderItem.all
 
 		@shop_items = ShopItem.all

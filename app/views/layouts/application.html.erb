@@ -4,23 +4,17 @@
     <title>NaganoCake</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <script src="https://kit.fontawesome.com/6bb1565f31.js" crossorigin="anonymous"></script>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-
     <header class="navbar navbar-fixed-top navbar-dark bg-dark">
       <div class="container-fruid">
-        <nav class="navbar-brand">
-          <%= link_to '長野CAKE', members_top_path, style: "font-size: 25px; text-decoration: none; color: gray;" %>
-        </nav>
-
         <nav class="navbar-nav">
-          <ul class="nav justify-content-end">
+          <ul class="nav">
+            <li><%= link_to 'ながのCAKE', members_top_path, class: "navbar-brand" %></li>
             <% url_array = request.url.split('/') %>
             <% if url_array[3] == "members" ||  url_array[3].blank? %>
                   <li class="mx-3"><%= link_to 'トップ', members_top_path, class: "nav-link fas fa-store" %></li>
@@ -47,7 +41,11 @@
                   <li class="mx-3"><%= link_to '会員一覧', admins_members_path, class: "nav-link fas fa-user" %></li>
                   <li class="mx-3"><%= link_to '管理者ログアウト', destroy_admin_session_path, class: "nav-link fas fa-sign-out-alt", method: :delete %></li>
                   <li class="mx-3" style="color: yellow;">管理者ログイン中</li>
-
+                  <%= form_tag(admins_members_path, method: :get, class: "form-inline my-2 my-lg-0 ml-auto") do %>
+                    <%= text_field_tag :search, '', placeholder: "名前を入力...", class: "form-control mr-sm-2" %>
+                    <%= content_tag :button, "会員検索", formaction: admins_members_path, class: "btn btn-outline-success my-2 my-sm-0  " %>
+                    <%= content_tag :button, "商品検索", formaction: admins_shop_items_path, class: "btn btn-outline-success my-2 my-sm-0" %>
+                  <% end %>
                 <% else %>
                   <li class="mx-3"><%= link_to '管理者ログイン', new_admin_session_path, class: "nav-link fas fa-sign-in-alt" %></li>
                   <li class="mx-3" style="color: red;">管理者ログイン未済</li>
@@ -56,7 +54,6 @@
             <% end %>
           </ul>
         </nav>
-        </div>
       </div>
     </header>
 

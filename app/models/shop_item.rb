@@ -16,4 +16,12 @@ class ShopItem < ApplicationRecord
   validates :price, presence: true
   validates :sale_status, presence: true
 
+  def self.search(search)
+    if search
+      ShopItem.where(['name LIKE ?', "%#{search}%"])
+    else
+      ShopItem.all
+    end
+  end
+
 end

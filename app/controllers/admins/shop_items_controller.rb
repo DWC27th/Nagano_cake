@@ -4,7 +4,10 @@ class Admins::ShopItemsController < ApplicationController
   def index
     @genres = Genre.where(published_status: "有効")  #ステータスが有効なジャンルのみ取得
     #@shop_items = ShopItem.all
-    @shop_items = ShopItem.where(genre_id: @genres.ids)  #ステータスが有効なジャンルに紐付いた商品だけを取得
+    @shop_items = ShopItem.search(params[:search])
+    #binding.pry
+    @shop_items = @shop_items.where(genre_id: @genres.ids)  #ステータスが有効なジャンルに紐付いた商品だけを取得
+    #binding.pry
     @shop_items = @shop_items.page(params[:page])
   end
 
