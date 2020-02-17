@@ -22,7 +22,7 @@ class Member < ApplicationRecord
 
   def self.search(search)
     if search
-      Member.where(['last_name LIKE ?', "%#{search}%"])
+      Member.where(["last_name LIKE? OR last_name_kana LIKE? OR first_name LIKE? OR first_name_kana LIKE?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%"])
     else
       Member.all
     end

@@ -18,7 +18,7 @@
             <% url_array = request.url.split('/') %>
             <% if url_array[3] == "members" ||  url_array[3].blank? %>
                   <li class="mx-3"><%= link_to 'トップ', members_top_path, class: "nav-link fas fa-store" %></li>
-                  <li class="mx-3"><%= link_to 'アバウト', members_about_path, class: "nav-link fas fa-user" %></li>
+                  <li class="mx-3"><%= link_to 'アバウト', members_about_path, class: "nav-link fas fa-birthday-cake" %></li>
 
                 <% if member_signed_in? %>
                   <li class="mx-3"><%= link_to 'カート', members_cart_items_path, class: "nav-link fas fa-shopping-cart" %></li>

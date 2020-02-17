@@ -10,23 +10,21 @@ class Members::OrdersController < ApplicationController
 	end
 
 	def new
-		#cart_items = CartItem.all
-		#cart_item = current_member.cart_items
-		#if cart_item.empty?
-	   	  #redirect_to members_top_path
-	   	#end
-
-  	    if current_member.shop_items.where(sale_status: "売切れ").blank? && Genre.where(id: current_member.shop_items.select(:genre_id), published_status: "無効").blank? && current_member.cart_items.present?  #カート商品の販売ステータス及びジャンルステータスが売切れ、無効でない場合
-		    @order = Order.new
-		    @order.member_id = current_member.id
-		    @order.order_status = 0
-		    @order.shipping_fee = 800
-		    @shipping_addresses = ShippingAddress.all
-    		@my_shipping_addresses = current_member.shipping_addresses
-    		@new_shipping_address = ShippingAddress.new
-  	    else
-  	      redirect_to members_cart_items_path, alert: "大変申し訳ございません。売切れ商品がカートにございます。お手数ですが削除してから情報入力にお進みください。"
-  	    end
+	    if current_member.cart_items.present?
+  	        if current_member.shop_items.where(sale_status: "売切れ").blank? && Genre.where(id: current_member.shop_items.select(:genre_id), published_status: "無効").blank? && current_member.cart_items.present?  #カート商品の販売ステータス及びジャンルステータスが売切れ、無効でない場合
+		        @order = Order.new
+		        @order.member_id = current_member.id
+		        @order.order_status = 0
+		        @order.shipping_fee = 800
+		        @shipping_addresses = ShippingAddress.all
+    	    	@my_shipping_addresses = current_member.shipping_addresses
+    	    	@new_shipping_address = ShippingAddress.new
+  	        else
+  	          redirect_to members_cart_items_path, alert: "大変申し訳ございません。売切れ商品がカートにございます。お手数ですが削除してから情報入力にお進みください。"
+  	        end
+	 	else
+            redirect_to members_cart_items_path, alert: "カートは空の為、注文できません。"
+	   	end
 	end
 
 	def create
@@ -53,40 +51,47 @@ class Members::OrdersController < ApplicationController
 		    @new_shipping_address.save
 		end
 
-		if @order.save
-	      redirect_to members_order_complete_path
-	  	else
-	  	  binding.pry
-	      flash.now[:alert] = "#{@order.errors.count}件のエラーが有ります"
-	   	  render "new"
-	 	end
+	    if current_member.cart_items.present?
+		    if @order.save
+	            redirect_to members_order_complete_path
+	  	    else
+	            flash.now[:alert] = "#{@order.errors.count}件のエラーが有ります"
+	   	        render "new"
+	 	    end
+	 	else
+            redirect_to members_cart_items_path, alert: "カートは空の為、注文できません。"
+	   	end
 	end
 
 	def confirm
-		@order = Order.new(order_params)
-		@order.order_status = "入金待ち"
-		@cart_items = CartItem.all
-		@cart_item = current_member.cart_items
-		@shop_items = ShopItem.all
-		@shop_item = current_member.shop_items
+	    if current_member.cart_items.present?
+		    @order = Order.new(order_params)
+		    @order.order_status = "入金待ち"
+		    @cart_items = CartItem.all
+		    @cart_item = current_member.cart_items
+		    @shop_items = ShopItem.all
+		    @shop_item = current_member.shop_items
 
-		@new_shipping_address = ShippingAddress.new
+		    @new_shipping_address = ShippingAddress.new
 
-    	@my_shipping_addresses = current_member.shipping_addresses
-    	if order_params[:payment_method].blank? && @order.member_id.blank?
-	 	  flash.now[:alert] = "支払方法、お届け先が入力されていません"
-	 	  render "new"
-    	elsif @order.member_id.blank?
-	 	  flash.now[:alert] = "お届け先が入力されていません"
-	 	  render "new"
-	 	elsif @order.member_id == 333
-	 	  @order.save
-	 	  @order.errors.delete(:member)
-	 	  if @order.errors.present?
-	 	    flash.now[:alert] = "#{@order.errors.count}件のエラーが有ります"
-	 	    render "new"
-	 	  end
-	 	end
+    	    @my_shipping_addresses = current_member.shipping_addresses
+    	    if order_params[:payment_method].blank? && @order.member_id.blank?
+	 	      flash.now[:alert] = "支払方法、お届け先が入力されていません"
+	 	      render "new"
+    	    elsif @order.member_id.blank?
+	 	      flash.now[:alert] = "お届け先が入力されていません"
+	 	      render "new"
+	 	    elsif @order.member_id == 333
+	 	      @order.save
+	 	      @order.errors.delete(:member)
+	 	      if @order.errors.present?
+	 	        flash.now[:alert] = "#{@order.errors.count}件のエラーが有ります"
+	 	        render "new"
+	 	      end
+	 	    end
+        else
+            redirect_to members_cart_items_path, alert: "カートは空の為、注文できません。"
+        end
 	end
 
 	def complete

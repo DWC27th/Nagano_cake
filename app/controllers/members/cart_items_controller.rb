@@ -20,7 +20,7 @@ class Members::CartItemsController < ApplicationController
         @cart_item = CartItem.find_by(shop_item_id: cart_item_params[:shop_item_id])
         @cart_item.quantity = @cart_item.quantity + cart_item_params[:quantity].to_i  #既存のカート商品個数に加算
         if @cart_item.save
-          redirect_to members_cart_items_path, notice: "カート商品の個数が更新されました"
+          redirect_to members_cart_items_path, notice: "カート商品の個数・小計・合計金額が更新されました"
         else
           redirect_back fallback_location: root_path, alert: "カートに入れる商品の個数を選択してください"
         end
@@ -33,7 +33,7 @@ class Members::CartItemsController < ApplicationController
   def update
   	@cart_item = CartItem.find(params[:id])
   	if @cart_item.update(cart_item_params)
-  	  redirect_to members_cart_items_path, notice: "カート商品の個数が更新されました"
+  	  redirect_to members_cart_items_path, notice: "カート商品の個数・小計・合計金額が更新されました"
     else
       redirect_to members_cart_items_path, alert: "個数は1以上の数字を入力してください"
     end

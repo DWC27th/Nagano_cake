@@ -18,7 +18,7 @@ class ShopItem < ApplicationRecord
 
   def self.search(search)
     if search
-      ShopItem.where(['name LIKE ?', "%#{search}%"])
+      ShopItem.where(["name LIKE ?", "%#{search}%"])
     else
       ShopItem.all
     end
