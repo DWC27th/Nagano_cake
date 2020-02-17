@@ -19,6 +19,7 @@ class Admins::OrdersController < ApplicationController
 
 		@orders = Order.all
 		@order_items = OrderItem.all
+		@orders = @orders.page(params[:page])
 		@members = Member.all
 	end
 

@@ -19,10 +19,26 @@
 //= require bootstrap
 //= require_tree .
 
-history.pushState(null, null, null);
-$(window).on("popstate", function (event) {
-  if (!event.originalEvent.state) {
-    history.pushState(null, null, null);
-    return;
-  }
+$(function(){
+
+//URLファイル名取得
+var path = location.href;
+var url = path.split('/')[5];
+//ブラウザバック対象ページ
+var pathTarget = "complete";
+//var check =  pathTarget.indexOf(url);
+console.log(url)
+console.log(pathTarget)
+//console.log(check)
+if(pathTarget == url){
+    //pathTargetに入っているページだけ実行される
+    $(function(){
+	 history.pushState(null, null, null); //ブラウザバック無効化
+	 //ブラウザバックボタン押下時
+	 $(window).on("popstate", function (event) {
+	   history.pushState(null, null, null);
+	   window.alert('前のページに戻る場合、前に戻るボタンから戻ってください。');
+	 });
+	});
+}
 });
