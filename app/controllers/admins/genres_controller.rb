@@ -1,4 +1,5 @@
 class Admins::GenresController < ApplicationController
+  before_action :authenticate_admin!
 
   def index
   	#@genres = Genre.where(published_status: "有効")

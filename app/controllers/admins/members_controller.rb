@@ -11,24 +11,22 @@ class Admins::MembersController < ApplicationController
 
     def edit
 	    @member = Member.with_deleted.find(params[:id])
-
     end
 
     def update
-    	member = Member.with_deleted.find(params[:id])
-        if params[:member_status] == "2"
-           member.destroy
-           redirect_to admins_member_path(member.id)
-
-        elsif params[:member_status] == "1"
-                   member.update(member_params)
-
-                  if member.deleted_at.present?
-                      member.restore
-                  end
-                      redirect_to admins_member_path(member.id)
-
-        end
+    	@member = Member.with_deleted.find(params[:id])
+      #binding.pry
+      if params[:member_status] == "2" && @member.deleted_at.blank?
+        @member.destroy
+      elsif params[:member_status] == "1" && @member.deleted_at.present?
+        @member.restore
+      end
+      if @member.update(member_params)
+        redirect_to admins_member_path(@member.id), notice: "会員情報が更新されました"
+      else
+        flash.now[:alert] = "#{@member.errors.count}件のエラーが有ります"
+        render "edit"
+      end
     end
 
     private

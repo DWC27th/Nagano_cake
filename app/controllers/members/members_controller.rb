@@ -6,11 +6,12 @@ class Members::MembersController < ApplicationController
     end
 
     def update
-        member = Member.with_deleted.find(params[:id])
-        if member.update(member_params)
-          redirect_to members_member_path(member.id)
+        @member = Member.with_deleted.find(params[:id])
+        if @member.update(member_params)
+          redirect_to members_member_path(@member.id), notice: "会員情報が更新されました"
         else
-          redirect_to edit_members_member_path(member.id)
+          flash.now[:alert] = "#{@member.errors.count}件のエラーが有ります"
+          render "edit"
         end
     end
 

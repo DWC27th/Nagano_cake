@@ -1,35 +1,37 @@
-
-
-<h3 style="margin:30px;">会員一覧画面</h3>
-
-
-<table class="table table-hover" style="width: 60%; margin: 0 auto;">
-  <thead>
-　   <tr>
-        <th bgcolor="#d3d3d3">会員id</th>
-　　     <th bgcolor="#d3d3d3">氏名</th>
-　　     <th bgcolor="#d3d3d3">メールアドレス</th>
-　　     <th bgcolor="#d3d3d3">ステータス</th>
-　   </tr>
-  </thead>
-
-  <tbody>
-    <% @members.each do |member| %>
-      <tr>
-        <td><%= member.id %></td>
-          <td><%= link_to "#{member.first_name}" + "#{member.last_name}", admins_member_path(member.id), :style=>"color:black;text-decoration: underline;"  %>
-          </td>
-            <td><%= member.email %></td>
-              <td><% if member.deleted_at.present? %>
-                      <%= "無効会員" %>
-                        <% else %>
-                          <%= "有効会員" %>
-                            <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h3 style="margin:30px;">会員一覧画面</h3>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th bgcolor="#d3d3d3">会員id</th>
+            <th bgcolor="#d3d3d3">氏名</th>
+            <th bgcolor="#d3d3d3">メールアドレス</th>
+            <th bgcolor="#d3d3d3">ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @members.each do |member| %>
+            <tr>
+              <td><%= member.id %></td>
+              <td><%= link_to "#{member.last_name}" + "#{member.first_name}", admins_member_path(member.id), :style=>"color:black;text-decoration: underline;"  %>
               </td>
-      </tr>
-    <% end %>
-  </tbody>
-　
-</table>
-
-<%= paginate @members, class: "pagination"  %>
+              <td><%= member.email %></td>
+              <td>
+                <% if member.deleted_at.present? %>
+                  <%= "無効会員" %>
+                <% else %>
+                  <%= "有効会員" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="row justify-content-center mt-3">
+        <%= paginate @members, class: "pagination"  %>
+      </div>
+    </div>
+  </div>
+</div>

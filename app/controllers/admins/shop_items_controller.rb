@@ -1,4 +1,5 @@
 class Admins::ShopItemsController < ApplicationController
+  before_action :authenticate_admin!
 
   def index
     @genres = Genre.where(published_status: "有効")  #ステータスが有効なジャンルのみ取得

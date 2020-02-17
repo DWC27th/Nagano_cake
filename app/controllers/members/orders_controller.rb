@@ -1,4 +1,6 @@
 class Members::OrdersController < ApplicationController
+    before_action :authenticate_member!
+
 	def index
 		@orders = Order.all
 		@order = current_member.orders
