@@ -25,9 +25,9 @@ Rails.application.routes.draw do
     put 'members/:id' => 'members#withdraw', as: 'withdraw_put'
     patch 'members/:id' => 'members#withdraw', as: 'withdraw_patch'
 
-    root 'members/shop_items#top'
-
   end
+
+    root 'members/shop_items#top'
 
   namespace :admins do
     resources :members, only: [:index, :show, :edit, :update, :destroy]
@@ -37,6 +37,6 @@ Rails.application.routes.draw do
     get 'top' => 'orders#top', as: 'top'
   end
 
-  root 'admins/orders#top'
+  #root 'admins/orders#top'
 
 end

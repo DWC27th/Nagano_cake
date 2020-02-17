@@ -22,7 +22,7 @@
         <nav class="navbar-nav">
           <ul class="nav justify-content-end"  style="font-size: 12px;">
             <% url_array = request.url.split('/') %>
-            <% if url_array[3] == "members" %>
+            <% if url_array[3] == "members" ||  url_array[3].blank? %>
                 <% if member_signed_in? %>
                   <li class="mx-3"><%= link_to '会員top', members_top_path, class: "nav-link fas fa-store" %></li>
                   <li class="mx-3"><%= link_to 'About', members_about_path, class: "nav-link fas fa-user" %></li>

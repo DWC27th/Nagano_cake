@@ -1,4 +1,6 @@
 class Admins::OrdersController < ApplicationController
+    before_action :authenticate_admin!
+
 	def top
 		@orders = Order.all
 		@today_orders_num = 0

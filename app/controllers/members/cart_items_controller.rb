@@ -1,4 +1,5 @@
 class Members::CartItemsController < ApplicationController
+  before_action :authenticate_member!
 
   def index
   	@shop_items = current_member.shop_items
