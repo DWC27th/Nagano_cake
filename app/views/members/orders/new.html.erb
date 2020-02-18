@@ -1,26 +1,56 @@
 <div class="container">
     <div class="row">
         <%= render partial: "/layouts/error_messages", locals: { model: @order } %>
-        <div class="col-6">
+        <div class="col-6 mx-auto mt-3">
             <h3>購入情報入力</h3>
             <%= form_for(@order, url: members_order_confirm_path, method: :get) do |order| %>
+            <div class="form-group" style="margin-top: 40px;" >
                 <h5>支払方法</h5>
-                <%= order.radio_button :payment_method, "クレジットカード" %>クレジットカード<br>
-                <%= order.radio_button :payment_method, "銀行振込" %>銀行振込<br>
-
+                <div class="form-group" style="margin-left: 40px;" >
+                    <%= order.radio_button :payment_method, "クレジットカード" %>クレジットカード<br>
+                </div>
+                <div class="form-group" style="margin-left: 40px;" >
+                    <%= order.radio_button :payment_method, "銀行振込" %>銀行振込<br>
+                </div>
+            </div>
+            <div class="form-group" style="margin-top: 40px;" >
                 <h5>お届け先</h5>
+                <div class="form-group" style="margin-left: 40px;">
                     <%= order.radio_button :member_id, 111 %>ご自身の住所<br>
-                    〒<%= current_member.postal_code %><%= current_member.address %><br><%= current_member.last_name %><%= current_member.first_name %>
-                    <br>
+                    <div class="form-group" style="margin-left: 40px;">
+                        〒<%= current_member.postal_code %><%= current_member.address %><br><%= current_member.last_name %><%= current_member.first_name %>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-left: 40px; margin-top: 20px;" >
                     <%= order.radio_button :member_id, 222 %>登録済住所から選択する<br>
+                    <div class="form-group" style="margin-left: 40px;">
                         <% @registered_addresses = @my_shipping_addresses.map.with_index(1) { |my_shipping_address, idx| "#{idx}：〒#{my_shipping_address.postal_code} #{my_shipping_address.address} #{my_shipping_address.name}" } %>
                         <%= order.select :shipping_fee, @registered_addresses %>
-                    <br>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-left: 40px; margin-top: 20px;">
                     <%= order.radio_button :member_id, 333 %>新しいお届け先<br>
-                            郵便番号　<%= order.text_field :postal_code %><br>
-                            住所 <%= order.text_field :address %><br>
-                            宛名 <%= order.text_field :name %>
-                <button type="submit" class="btn btn-primary btn-block">確認画面に進む</button>
+                    <div class="form-group" style="margin-left: 40px;">
+                        <div class="form-group row">
+                            <%= order.label :postal_code, "郵便番号", class: "col-3" %>
+                            <%= order.text_field :postal_code, class: "col-4" %>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-left: 40px;">
+                        <div class="form-group row">
+                            <%= order.label :address, "住所", class: "col-3" %>
+                            <%= order.text_field :address, class: "col-8" %>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-left: 40px;">
+                        <div class="form-group row">
+                            <%= order.label :name, "宛名", class: "col-3" %>
+                            <%= order.text_field :name, class: "col-4" %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <button type="submit" class="btn btn-primary btn-block col-4 mx-auto" >確認画面に進む</button>
             <% end %>
         </div>
     </div>
