@@ -46,8 +46,11 @@
         </div>
         <div class="col-12">
             <h5>支払方法</h5>
-            <%= @order.payment_method %><br>
+            <div class="form-group" style="margin-left: 40px;">
+                <%= @order.payment_method %>
+            </div>
             <h5>お届け先</h5>
+            <div class="form-group" style="margin-left: 40px;">
             <% if @order.member_id == 111 %>
                 〒<%= @order.postal_code = "#{current_member.postal_code}" %> <%= @order.address = "#{current_member.address}" %><br>
                 <%= @order.name = "#{current_member.last_name}#{current_member.first_name}" %>
@@ -84,12 +87,12 @@
                         <% end %>
                     <% end %>
                 </div>
-
-                <div class="col-12">
-                    <div class="mx-auto" style="width: 150px;">
-                        <button type="submit" class="btn btn-primary btn-block">購入を確定する</button>
-                    </div>
+            </div>
+            <div class="col-12">
+                <div class="mx-auto" style="width: 150px;">
+                    <button type="submit" class="btn btn-primary btn-block">購入を確定する</button>
                 </div>
+            </div>
             <% end %>
         </div>
     </div>
