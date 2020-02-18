@@ -12,7 +12,6 @@ class Admins::OrdersController < ApplicationController
 	end
 
 	def index
-		#binding.pry
 		if Member.where(id: params[:member_id]).present?
 			@member = Member.find(params[:member_id])
 			@orders = @member.orders
