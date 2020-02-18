@@ -1,12 +1,12 @@
 <div class="container">
     <div class="row">
         <%= render partial: "/layouts/error_messages", locals: { model: @order } %>
-        <div class="col-xs-12">
+        <div class="col-6">
             <h3>購入情報入力</h3>
             <%= form_for(@order, url: members_order_confirm_path, method: :get) do |order| %>
                 <h5>支払方法</h5>
-                <%= order.radio_button :payment_method, "クレジットカード" %>クレジットカード
-                <%= order.radio_button :payment_method, "銀行振込" %>銀行振込
+                <%= order.radio_button :payment_method, "クレジットカード" %>クレジットカード<br>
+                <%= order.radio_button :payment_method, "銀行振込" %>銀行振込<br>
 
                 <h5>お届け先</h5>
                     <%= order.radio_button :member_id, 111 %>ご自身の住所<br>
