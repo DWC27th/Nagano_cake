@@ -21,6 +21,7 @@ class Admins::OrdersController < ApplicationController
 		@order_items = OrderItem.all
 		@orders = @orders.page(params[:page])
 		@members = Member.all
+		@orders = @orders.page(params[:page])
 	end
 
 	def show

@@ -2,7 +2,8 @@ class Admins::MembersController < ApplicationController
     before_action :authenticate_admin!
 
     def index
-	    @members = Member.with_deleted.page(params[:page])
+	    @members = Member.with_deleted.search(params[:search])
+      @members = @members.page(params[:page])
     end
 
     def show
