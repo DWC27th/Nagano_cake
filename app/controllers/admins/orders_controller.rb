@@ -12,13 +12,22 @@ class Admins::OrdersController < ApplicationController
 	end
 
 	def index
+		if Member.where(id: params[:member_id]).present?
+			@member = Member.find(params[:member_id])
+			@orders = @member.orders
+		elsif params[:mark].present?
+			@orders = Order.where("created_at >= ? ", params[:mark])
+		else
+			@orders = Order.all
+		end
+
 		@path = Rails.application.routes.recognize_path(request.referer)
 
 	    @before_controller = @path[:controller]
 	    @before_action = @path[:action]
 
-		@orders = Order.all
 		@order_items = OrderItem.all
+		@orders = @orders.page(params[:page])
 		@members = Member.all
 		@orders = @orders.page(params[:page])
 	end

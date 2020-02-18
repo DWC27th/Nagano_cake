@@ -12,26 +12,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<!-- 遷移元：会員詳細ページ（admin用） -->
-						<% if @before_controller == "admins/members" && @before_action == "show" %>
-						<% member_id = request.referer.split('/') %>
-							<% @orders.each do |order| %>
-								<% if order.member_id == member_id[-1].to_i %>
-									<%= render partial: "order_table", locals: { order: order } %>
-								<% end %>
-							<% end %>
-						<!-- 遷移元：管理者トップページ -->
-						<% elsif @before_controller == "admins/orders" && @before_action == "top" %>
-							<% @orders.each do |order| %>
-								<% if (order[:created_at].to_s.match(/#{Date.today.to_s}.+/)) %>
-									<%= render partial: "order_table", locals: { order: order } %>
-								<% end %>
-							<% end %>
-						<!-- 遷移元：ヘッダー -->
-						<% else %>
-							<% @orders.each do |order| %>
-								<%= render partial: "order_table", locals: { order: order } %>
-							<% end %>
+						<% @orders.each do |order| %>
+							<%= render partial: "order_table", locals: { order: order } %>
 						<% end %>
 					</tbody>
 				</table>

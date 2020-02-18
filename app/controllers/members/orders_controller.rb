@@ -2,11 +2,11 @@ class Members::OrdersController < ApplicationController
     before_action :authenticate_member!
 
 	def index
-		@orders = Order.all
-		@order = current_member.orders.page(params[:page])
-		@order_items = OrderItem.all
+			@orders = Order.all
+			@order = current_member.orders.page(params[:page])
+			@order_items = OrderItem.all
 
-		@shop_items = ShopItem.all
+			@shop_items = ShopItem.all
 	end
 
 	def new
