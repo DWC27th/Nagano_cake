@@ -3,7 +3,7 @@
     <div class="row">
         <% idx_num = @order.shipping_fee %>
         <div class="col-7">
-            <table class="table table-bordered">
+            <table class="table table-bordered bg-white">
                 <thead class="thead-light">
                 <tr>
                     <th>商品</th>
@@ -31,7 +31,7 @@
         <div class="col-5">
             <div class="col-7">
               <% @order.shipping_fee = 800 %>
-              <table class="table table-bordered">
+              <table class="table table-bordered bg-white">
                 <tr>
                   <th>配送料</th><td><%= @order.shipping_fee %>円</td>
                 </tr>

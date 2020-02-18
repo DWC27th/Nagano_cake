@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row justify-content-start mt-3 mb-1">
+  <div class="row justify-content-start pt-3 mb-3">
     <h2 class="fas fa-shopping-cart"> ショッピングカート</h2>
   </div>
 
@@ -9,15 +9,15 @@
 　    <%= link_to "カートを空にする", members_cart_items_path, method: :delete, "data-confirm" => "カートを空にしてもよろしいですか？", class: "btn btn-danger" %>
     </div>
 
-    <table class="table table-bordered">
+    <table class="table table-bordered bg-white">
       <thead class="thead-light">
         <tr>
           <th>商品名</th>
-          <th>商品状態</th>
+          <th>商品画像</th>
           <th>単価(税込)</th>
           <th>数量</th>
           <th>数量</th>
-          <th>小計</th>
+          <th>小計(税込)</th>
           <th></th>
         </tr>
       </thead>
@@ -59,8 +59,8 @@
       <div class="col-3 offset-3">
         <table class="table table-bordered">
           <tr>
-            <thead class="thead-light">
-              <th>合計金額</th>
+            <thead class="thead-light bg-white">
+              <th>合計金額(税込)</th>
               <td><%= cart_item_total_price.to_s(:delimited) %>円</td>
             </thead>
           </tr>
