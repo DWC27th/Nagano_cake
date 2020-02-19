@@ -1,5 +1,5 @@
 <div class="container">
-	<h3>配送先登録・一覧</h3>
+	<h2 class="fas fa-truck mt-3 mb-3"> 配送先登録・一覧</h2>
 	<div class="row">
         <%= render partial: "/layouts/error_messages", locals: { model: @shipping_address } %>
 		<%= form_for(@shipping_address, url: members_shipping_addresses_path) do |shipping_address| %>
@@ -20,8 +20,8 @@
 	    	</div>
         <% end %>
 	</div>
-	<div class="row">
-		<div class="col-7">
+	<div class="row mt-5">
+		<div class="col-8">
 			<table class="table table-bordered bg-white">
 				<thead class="thead-light">
 				<tr>
@@ -38,18 +38,17 @@
 						<td><%= my_shipping_addresses.postal_code %></td>
 						<td><%= my_shipping_addresses.address %></td>
 						<td><%= my_shipping_addresses.name %></td>
-						<td><%= link_to edit_members_shipping_address_path(my_shipping_addresses) do %>
-				 				<button type="button" class="btn btn-default btn-block">編集する</button>
-							<% end %>
+						<td><%= link_to "編集する", edit_members_shipping_address_path(my_shipping_addresses), class: "btn btn-success btn-block btn-sm" %>
 						</td>
-						<td><%= link_to members_shipping_address_path(my_shipping_addresses), method: :delete do %>
-				 				<button type="button" class="btn btn-default btn-block">削除する</button>
-							<% end %>
+						<td><%= link_to "削除する", members_shipping_address_path(my_shipping_addresses), class: "btn btn-danger btn-block btn-sm", method: :delete, "data-confirm" => "削除してもよろしいですか？" %>
 						</td>
 					</tr>
 				<% end %>
 				</tbody>
 			</table>
+			<div class="row justify-content-center mt-3">
+				<%= paginate @my_shipping_addresses, class: "pagination" %>
+			</div>
 		</div>
     </div>
 </div>

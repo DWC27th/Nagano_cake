@@ -41,8 +41,8 @@
                   <li class="mx-3"><%= link_to '管理者ログアウト', destroy_admin_session_path, class: "nav-link fas fa-sign-out-alt", method: :delete %></li>
                   <%= form_tag(admins_members_path, method: :get, class: "form-inline my-2 my-lg-0 ml-auto") do %>
                     <%= text_field_tag :search, '', placeholder: "名前を入力...", class: "form-control mr-sm-2" %>
-                    <%= content_tag :button, "会員検索", formaction: admins_members_path, class: "btn btn-outline-success my-2 my-sm-0  " %>
-                    <%= content_tag :button, "商品検索", formaction: admins_shop_items_path, class: "btn btn-outline-success my-2 my-sm-0" %>
+                    <%= content_tag :button, "会員検索", formaction: admins_members_path, class: "btn btn-sm btn-outline-success my-2 my-sm-0 mr-1" %>
+                    <%= content_tag :button, "商品検索", formaction: admins_shop_items_path, class: "btn btn-sm btn-outline-success my-2 my-sm-0" %>
                   <% end %>
                 <% else %>
                   <li class="mx-3"><%= link_to '管理者ログイン', new_admin_session_path, class: "nav-link fas fa-sign-in-alt" %></li>
@@ -55,9 +55,6 @@
       </div>
     </header>
 
-    <div id="main-body">
-
-
     <% unless notice.nil? %>
       <p id="notice" class="alert alert-success">
         <%= notice %>
@@ -69,8 +66,10 @@
       </p>
     <% end %>
 
-    <div id="main-body">
-      <%= yield %>
+    <div class="p-1">
+      <div class="main-body">
+        <%= yield %>
+      </div>
     </div>
 
   </body>

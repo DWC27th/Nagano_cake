@@ -1,6 +1,5 @@
-<h2>会員詳細画面</h2>
-
-
+<div class="container">
+<h2 class="mt-3 mb-4 fas fa-user"> 会員詳細画面</h2>
     <div style="margin-left: 28px;">
 
                 <table align="28" border="1" width="700" cellspacing="0" cellpadding="5" bordercolor="#333333">
@@ -8,13 +7,11 @@
                     <tr>
                         <td bgcolor="#d3d3d3" align="left" nowrap>会員ID</td>
                         <td bgcolor="#FFFFFF" valign="top" width="500"><%= @member.id %>
-                            <div style="background-color: #87ceeb; width: 80px; display:inline-block; margin-left:5px; border-radius: 10px; text-align: center;">
                                     <% if @member.deleted_at.present? %>
-                                        <%= "無効会員" %>
+                                        <div class="btn btn-secondary btn-sm active"><%= "無効会員" %></div>
                                             <% else %>
-                                                <%= "有効会員" %>
+                                                <div class="btn btn-success btn-sm active"><%= "有効会員" %></div>
                                                     <% end %>
-                            </div>
                         </td>
                     </tr>
 
@@ -56,7 +53,8 @@
 
                             <div class="actions" style="margin: 30px;">
                                 <%= link_to"編集する", edit_admins_member_path, class: "btn btn-primary" %>
-                                <span class="btn btn-primary" style="color: white;"><%= link_to"注文履歴一覧を見る", controller: "admins/orders", action: "index", member_id: @member.id %></span>
+                                <span class="btn btn-primary"><%= link_to"注文履歴一覧を見る", controller: "admins/orders", action: "index", member_id: @member.id %></span>
                             </div>
 
     </div>
+</div>

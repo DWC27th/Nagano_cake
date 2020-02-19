@@ -4,7 +4,7 @@ class Members::ShippingAddressesController < ApplicationController
 	def index
 		@shipping_address = ShippingAddress.new
     @shipping_address.member_id = current_member.id
-    @my_shipping_addresses = current_member.shipping_addresses
+    @my_shipping_addresses = current_member.shipping_addresses.page(params[:page]).per(3)
 	end
 
 	def create

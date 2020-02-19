@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-6">
         <%= render partial: "/layouts/error_messages", locals: { model: @shipping_address } %>
-			<h3>配送先登録・一覧</h3>
+			<h2 class="mt-3 mb-3 fas fa-truck"> 配送先登録・一覧</h2>
             <%= form_for(@shipping_address, url: members_shipping_address_path) do |shipping_address| %>
             <div class="field row mb-3">
                 <%= shipping_address.label :postal_code, "郵便番号", class: "col-4" %>

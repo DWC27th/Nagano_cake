@@ -3,7 +3,7 @@ class Admins::GenresController < ApplicationController
 
   def index
   	#@genres = Genre.where(published_status: "有効")
-    @genres = Genre.all.page(params[:page])
+    @genres = Genre.all.page(params[:page]).per(5)
   	@genre = Genre.new
   end
 

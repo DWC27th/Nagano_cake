@@ -1,18 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
 
+      <h2 class="mt-5 mb-5" style="text-align:center;">本当に退会しますか？</h2>
 
-<h4 style="text-align:center;">本当に退会しますか？</h4><br>
+    <p style="text-align: center;">
+      退会すると、会員登録情報や<br>
+      これまでの購入履歴が閲覧できなくなります。<br>
+      退会する場合は『退会する』をクリックしてください。
+      </p>
 
-<p style="text-align: center;">退会すると、会員登録情報や<br>
-これまでの購入履歴が閲覧できなくなります。<br>
-退会する場合は『退会する』をクリックしてください。</p>
+     <div class="form-body">
+        <%= form_for(@member, url: members_member_path, method: :delete) do |f| %>
 
-<div class="form-body">
-    <%= form_for(@member, url: members_member_path, method: :delete) do |f| %>
-
-        <div class="actions" style="text-align:center;">
-            <%= f.submit "退会する", class: "btn btn-danger" %>
-            <%= link_to "退会しない",members_member_path(@member.id), class: "btn btn-primary" %>
-        </div>
-    <% end %>
+             <div class="actions" style="text-align:center;">
+                  <%= f.submit "退会する", class: "btn btn-danger" %>
+                  <%= link_to "退会しない",members_member_path(@member.id), class: "btn btn-primary" %>
+            </div>
+          <% end %>
+      </div>
+    </div>
+  </div>
 </div>
-

@@ -1,7 +1,6 @@
-
 <div class="box">
 
-<h4 style="margin: 28px; width:180px; display: inline-block;">会員編集画面</h4> <%= link_to"退会する", members_cancel_path, class: "btn btn-danger" ,style:"margin-bottom:10px;"%>
+<h2 class="fas fa-user" style="margin: 28px; width:250px; display: inline-block;"> 会員編集画面</h2> <%= link_to"退会する", members_cancel_path, class: "btn btn-danger" ,style:"margin-bottom:10px;"%>
 
     <%= render partial: "/layouts/error_messages", locals: { model: @member } %>
 

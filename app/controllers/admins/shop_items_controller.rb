@@ -8,7 +8,7 @@ class Admins::ShopItemsController < ApplicationController
     #binding.pry
     @shop_items = @shop_items.where(genre_id: @genres.ids)  #ステータスが有効なジャンルに紐付いた商品だけを取得
     #binding.pry
-    @shop_items = @shop_items.page(params[:page])
+    @shop_items = @shop_items.page(params[:page]).per(5)
   end
 
   def new

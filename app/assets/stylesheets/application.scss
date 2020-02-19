@@ -82,10 +82,10 @@ header {
   font-size: 30px;
 }
 
-#main-body {
-  height: 650px;
-  background-image: url(frame2.jpg);
-  background-size: 100% 100%;
-  background-position: top center;
+.main-body {
+  height: 640px;
+  background-image: url(frame2.jpg), url(frame3.jpg);
+  background-size: contain, contain;
+  background-position: left 5px, right 5px;
   background-repeat: no-repeat;
 }
